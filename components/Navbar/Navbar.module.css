@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+}
+
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLinks a {
+  font-weight: 500;
+  color: #111;
+  transition: color 0.2s;
+}
+
+.navLinks a:hover {
+  color: var(--accent-color);
+}
