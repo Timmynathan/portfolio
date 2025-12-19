@@ -12,9 +12,8 @@ export default function Hero() {
         <h1>Software Developer</h1>
 
         <p>
-          I build clean, responsive, and modern web applications using React,
-          Next.js, and other modern technologies. I focus on creating intuitive
-          user experiences and writing maintainable code.
+          I build clean, modern web and mobile applications that are easy to use and solve real-world problems. 
+          I enjoy turning ideas into reliable digital solutions and continuously improving how people interact with technology.
         </p>
 
         <div className={styles.heroButtons}>
