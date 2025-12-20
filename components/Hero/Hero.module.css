@@ -1,132 +1,128 @@
-
-.heroSection {
-  display: flex;
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12.75rem 2rem 9rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
-  justify-content: space-between;
-  padding: 8rem 2rem 6rem;
+  gap: 5rem;
   background: #ffffff;
-  flex-wrap: wrap;
-  position: relative;
-  overflow: hidden;
 }
 
-.heroSection::before {
-  content: "";
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 320px;
-  height: 320px;
-  background: rgba(254, 82, 82, 0.08);
-  border-radius: 50%;
+/* TEXT */
+
+.text {
+  max-width: 520px;
 }
 
-.heroSection::after {
-  content: "";
-  position: absolute;
-  bottom: -80px;
-  left: -80px;
-  width: 420px;
-  height: 420px;
-  background: rgba(254, 82, 82, 0.04);
-  border-radius: 50%;
-}
-
-.heroContent {
-  max-width: 620px;
-  position: relative;
-  z-index: 1;
-}
-
-.introText {
-  display: block;
-  color: var(--accent-color);
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.08em;
+.intro {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: #777;
+  margin-bottom: 1.2rem;
 }
 
-.heroContent h1 {
-  font-size: 3.6rem;
+.text h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.05;
   margin-bottom: 1.5rem;
   color: #111;
-  line-height: 1.1;
 }
 
-.heroContent p {
-  font-size: 1.15rem;
+.text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: #555;
-  line-height: 1.8;
-  margin-bottom: 3rem;
+  margin-bottom: 2.8rem;
 }
 
-.heroButtons {
+/* CTA */
+
+.cta {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(254, 82, 82, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+}
+
+/* IMAGE */
+
+.imageWrapper {
   display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.primaryBtn {
-  padding: 1rem 2.2rem;
-  background-color: var(--accent-color);
-  color: #ffffff;
-  border-radius: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center -0.5%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
 }
 
-.primaryBtn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(254, 82, 82, 0.35);
-}
-
-.secondaryBtn {
-  padding: 1rem 2.2rem;
-  background-color: transparent;
-  color: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  border-radius: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.secondaryBtn:hover {
-  background-color: var(--accent-color);
-  color: #ffffff;
-}
-
-.heroImage {
-  position: relative;
-  z-index: 1;
-}
-
-.heroImage img {
-  width: 500px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 22px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
-}
+/* MOBILE */
 
 @media (max-width: 768px) {
-  .heroSection {
-    padding: 5rem 1.5rem;
+  .hero {
+    grid-template-columns: 1fr;
     text-align: center;
+    padding: 6rem 1.5rem;
   }
 
-  .heroContent h1 {
-    font-size: 2.7rem;
+  .imageWrapper {
+    margin-bottom: 3rem;
   }
 
-  .heroButtons {
-    justify-content: center;
+  .text h1 {
+    font-size: 2.6rem;
   }
+}
 
-  .heroImage {
-    margin-top: 3rem;
-  }
+.actions {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+/* Primary button */
+.ctaPrimary {
+  padding: 0.85rem 2rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(254, 82, 82, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+}
+
+.ctaSecondary {
+  padding: 0.85rem 2rem;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ctaSecondary:hover {
+  background-color: var(--accent-color);
+  color: #ffffff;
 }

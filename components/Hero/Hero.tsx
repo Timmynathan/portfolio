@@ -3,37 +3,41 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section className={styles.heroSection}>
-      <div className={styles.heroContent}>
-        <span className={styles.introText}>
+    <section className={styles.hero}>
+      <div className={styles.text}>
+        <span className={styles.intro}>
           Hi there, I’m Oluwatimilehin
         </span>
 
-        <h1>Software Developer</h1>
+        <h1>
+          Software <br /> Developer
+        </h1>
 
         <p>
-          I build clean, modern web and mobile applications that are easy to use and solve real-world problems. 
-          I enjoy turning ideas into reliable digital solutions and continuously improving how people interact with technology.
+          I design and build simple, reliable digital experiences that solve
+          real problems and feel intuitive to use.
         </p>
 
-        <div className={styles.heroButtons}>
-          <a href="#projects" className={styles.primaryBtn}>
-            See My Work
+        <div className={styles.actions}>
+          <a href="#projects" className={styles.ctaPrimary}>
+            See my work
           </a>
-          <a href="#contact" className={styles.secondaryBtn}>
-            Contact Me
+
+          <a href="#contact" className={styles.ctaSecondary}>
+            Contact me
           </a>
         </div>
       </div>
 
-      <div className={styles.heroImage}>
+      <div className={styles.imageWrapper}>
         <Image
-        src="/hero-image.png"
-        alt="Oluwatimilehin portrait"
-        width={460}
-        height={460}
-        priority
-      />
+          src="/hero-image.jpg"
+          alt="Oluwatimilehin portrait"
+          width={320}
+          height={320}
+          priority
+          className={styles.image}
+        />
       </div>
     </section>
   );

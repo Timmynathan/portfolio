@@ -1,0 +1,112 @@
+.projectPage {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6rem 2rem 7rem;
+}
+
+/* Back Button */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.backLink:hover {
+  opacity: 1;
+}
+
+/* Header */
+.header {
+  margin-bottom: 4rem;
+}
+
+.sectionLabel {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: #111;
+  margin-bottom: 1.2rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+  max-width: 680px;
+}
+
+/* Sections */
+.section {
+  margin-top: 4.5rem;
+}
+
+.sectionAlt {
+  margin-top: 4.5rem;
+  padding: 3rem;
+  border-radius: 18px;
+  background-color: rgba(254, 82, 82, 0.04);
+}
+
+.section h2,
+.sectionAlt h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.section p,
+.sectionAlt p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* Lists */
+.list,
+.techList {
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  color: #555;
+  line-height: 1.9;
+}
+
+.techList li {
+  font-weight: 500;
+}
+
+/* Images */
+.imageGrid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.8rem;
+}
+
+.imageGrid img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2.4rem;
+  }
+
+  .sectionAlt {
+    padding: 2rem;
+  }
+}

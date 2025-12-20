@@ -33,7 +33,7 @@ export default function Projects() {
             </p>
 
             <Link
-              href="/projects/portfolio-website"
+              href="/projects/shift-management"
               className={styles.projectLink}
             >
               View Details

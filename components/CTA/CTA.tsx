@@ -1,30 +1,39 @@
+import styles from "./CTA.module.css";
+
 export default function CTA() {
   return (
-    <section
-      id="contact"
-      style={{
-        padding: "4rem 1rem",
-        textAlign: "center",
-      }}
-    >
-      <h2>Get In Touch</h2>
-      <p>
-        I’m open to opportunities, collaborations, and learning experiences.
-        Feel free to reach out to me on WhatsApp at +234 0816 555 7693 or via email
-      </p>
+    <section id="contact" className={styles.ctaSection}>
+      <div className={styles.ctaContainer}>
+        <span className={styles.ctaLabel}>Let’s Connect</span>
 
-      <a
-        href="mailto:oluwatimilehin.ilesanmi@pau.edu.ng"
-        style={{
-          display: "inline-block",
-          marginTop: "1rem",
-          padding: "0.75rem 1.5rem",
-          border: "1px solid black",
-          textDecoration: "none",
-        }}
-      >
-        Email Me
-      </a>
+        <h2>Get In Touch</h2>
+
+        <p>
+          I’m open to opportunities, collaborations, and learning experiences.
+          Whether you have a project in mind or just want to connect, feel free
+          to reach out.
+        </p>
+
+        <div className={styles.ctaButtons}>
+          <a
+            href="https://mail.google.com/mail/?view=cm&to=oluwatimilehin.ilesanmi@pau.edu.ng"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.primaryBtn}
+          >
+            Email Me
+          </a>
+
+          <a
+            href="https://wa.me/2348132265016"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.secondaryBtn}
+          >
+            WhatsApp
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

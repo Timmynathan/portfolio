@@ -1,31 +1,79 @@
 .ctaSection {
-  padding: 6rem 2rem;
+  padding: 7rem 2rem;
+  background-color: rgba(254, 82, 82, 0.05);
+  display: flex;
+  justify-content: center;
+}
+
+.ctaContainer {
+  max-width: 720px;
   text-align: center;
-  background-color: #f0f4ff;
 }
 
-.ctaSection h2 {
+.ctaLabel {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--accent-color);
-  font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
-.ctaSection p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+.ctaContainer h2 {
+  font-size: 2.6rem;
+  margin-bottom: 1.2rem;
+  color: #111;
+}
+
+.ctaContainer p {
+  font-size: 1.15rem;
   color: #555;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
 }
 
-.ctaButton {
-  padding: 0.75rem 1.5rem;
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  padding: 0.9rem 2rem;
   background-color: var(--accent-color);
-  color: white;
-  border-radius: 8px;
-  font-weight: 500;
+  color: #ffffff;
+  border-radius: 14px;
+  font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.ctaButton:hover {
-  background-color: #005bb5;
+.primaryBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(254, 82, 82, 0.35);
+}
+
+.secondaryBtn {
+  padding: 0.9rem 2rem;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.secondaryBtn:hover {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ctaContainer h2 {
+    font-size: 2.2rem;
+  }
 }
