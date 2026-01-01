@@ -31,4 +31,9 @@ a:hover {
 /* Accent color variable */
 :root {
   --accent-color: #fe5252;
+  --text-dark: #111111;
+  --text-muted: #555555;
+  --bg-light: #ffffff;
+  --bg-soft: #fafafa;
+  --border-soft: #eaeaea;
 }
