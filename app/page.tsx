@@ -62,7 +62,7 @@ const SKILLS = [
 ];
 
 const STATS: Stat[] = [
-  { value: "4.0/5.0", label: "GPA" },
+  { value: "2:1", label: "GRADE" },
   { value: "2", label: "Production Products" },
   { value: "100+", label: "Clients Served" },
 ];
@@ -364,7 +364,7 @@ export default function Portfolio() {
     }
     const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:ilesanmitimilehin19@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:oluwatimilehin.nathan@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleOpenProjectDetails = (projectId: string) => {
@@ -631,7 +631,7 @@ export default function Portfolio() {
                 <p className="contact-email">
                   Or email me directly at{" "}
                   <a href="mailto:ilesanmitimilehin19@gmail.com">
-                    ilesanmitimilehin19@gmail.com
+                    oluwatimilehin.nathan@gmail.com
                   </a>
                 </p>
               </div>
