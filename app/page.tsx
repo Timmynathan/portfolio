@@ -82,6 +82,17 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
 
 const PROJECTS: Project[] = [
   {
+    id: "RAY DETECT",
+    title: "INL Diagnostics — AI-Powered Tuberculosis Detection",
+    badge: "Early Stage Startup",
+    description: "Developed a machine learning system to assist in the early detection of tuberculosis (TB) from chest X-ray images. The project leverages deep learning techniques to classify images as TB-positive or negative, improving diagnostic support and accessibility. It also explores model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
+    techStack: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
+    linkLabel: "Visit Platform",
+    href: "https://inldiagnostics-ai.vercel.app/",
+    note: "*In active development — launching mid-2026*",
+    image: "/projects/tbx.png",
+  },
+  {
     id: "247HR",
     title: "247HR — Unified platform for end-to-end HR management",
     badge: "Isurf Global Services",
@@ -94,9 +105,9 @@ const PROJECTS: Project[] = [
   },
   {
     id: "City Care",
-    title: "City Care — Healthcare Management System ",
+    title: "City Care — Healthcare Management System",
     description:
-      "CityCare is a healthcare management system (HMS) designed to digitize and streamline clinical workflows across four user roles: Patients, Clinicians, Lab Technicians, and Administrators. It solves the coordination problem between appointment scheduling, clinical encounters, lab order processing, result verification, billing, and administrative oversight — all within asingle platform.",
+      "CityCare is a healthcare management system (HMS) designed to digitize and streamline clinical workflows across four user roles: Patients, Clinicians, Lab Technicians, and Administrators. It solves the coordination problem between appointment scheduling, clinical encounters, lab order processing, result verification, billing, and administrative oversight — all within a single platform.",
     techStack: ["React", "TypeScript", "NestJS", "PostgreSQL", "Prisma"],
     linkLabel: "View Live Platform",
     href: "https://csc-419-ca-project.vercel.app/login",
@@ -107,7 +118,7 @@ const PROJECTS: Project[] = [
     id: "Beta Biz",
     title: "Beta Biz — A mobile-first AI-powered financial assistant",
     badge: "Payaza Hackathon 2024",
-    description:"BetaBiz is a powerful virtual business partner accessible right from every business owner's most essential tool—their mobile phone. BetaBiz will empower SMEs by tracking cash flow, evaluating business health, offering tailored daily goals, and financial literacy all with the ultimate aim of unlocking access to funding and helping them grow.",
+    description: "BetaBiz is a powerful virtual business partner accessible right from every business owner's most essential tool—their mobile phone. BetaBiz will empower SMEs by tracking cash flow, evaluating business health, offering tailored daily goals, and financial literacy all with the ultimate aim of unlocking access to funding and helping them grow.",
     techStack: ["React Native", "Node JS"],
     linkLabel: "",
     href: "",
@@ -115,17 +126,6 @@ const PROJECTS: Project[] = [
     image: "/projects/betabiz.png",
     imageType: "mobile",
   },
-    {
-    id: "RAY DETECT",
-    title: "AI-Powered Tuberculosis Detection System",
-    badge: "Final Year Project",
-    description:"Developed a machine learning system to assist in the early detection of tuberculosis (TB) from chest X-ray images. The project leverages deep learning techniques to classify images as TB-positive or negative, improving diagnostic support and accessibility. It also explores model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
-    techStack: ["Python", "TensorFlow","OpenCV","Matplotlib"],
-    linkLabel: "View Details",
-    href: "",
-    note: "*In active development — launching mid-2026*",
-    image: "",
-  }
 ];
 
 const TIMELINE: TimelineEntry[] = [
@@ -425,13 +425,12 @@ export default function Portfolio() {
       <main>
         {/* ── Hero ── */}
         <section id="home" className="hero">
-          <div className="parallax-bg" />
           <div className="container">
             <div className="hero-content fade-in">
+              <p className="hero-eyebrow">Software Developer</p>
               <h1>Ilesanmi Oluwatimilehin Nathaniel</h1>
-              <div className="nickname">(Nathaniel)</div>
               <p className="tagline">
-                Frontend Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks. 
+                Full-Stack Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks.
               </p>
               <div className="hero-buttons">
                 <a href="#projects" className="cta-button magnetic">
@@ -448,24 +447,11 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Floating particles */}
-        <div className="floating-particles">
-          {[0, 1, 1.5, 2, 2.5, 3, 4, 5, 0.5].map((delay, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${(i + 1) * 10}%`,
-                animationDelay: `${delay}s`,
-              }}
-            />
-          ))}
-        </div>
-
         {/* ── About ── */}
         <section id="about">
           <div className="container">
             <div className="fade-in">
+              <p className="section-label">01 — About</p>
               <h2 className="section-title">About Me</h2>
               <p className="section-subtitle">
                 Passionate about technology, focused on building scalable products with real-world impact, and deeply rooted in innovation and 
@@ -473,11 +459,18 @@ export default function Portfolio() {
               </p>
 
               <div className="about-grid">
-                <div className="about-image">IO</div>
+                <div className="about-image">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/profile_photo.png"
+                    alt="Oluwatimilehin Nathaniel"
+                    className="about-photo"
+                  />
+                </div>
                 <div className="about-content">
-                  <h3>Frontend-Focused Full-Stack Engineer</h3>
+                  <h3>Full-Stack Software Engineer</h3>
                   <p>
-                    Frontend Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks. 
+                    Full-Stack Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks.
                     Skilled in developing reusable UI components, designing REST APIs, and troubleshooting issues across the application stack. 
                     Experienced in agile, collaborative environments, with strong communication skills and a focus on writing clean, maintainable code. 
                   </p>
@@ -514,6 +507,7 @@ export default function Portfolio() {
         <section id="projects" className="projects">
           <div className="container">
             <div className="fade-in">
+              <p className="section-label">02 — Work</p>
               <h2 className="section-title">Featured Projects</h2>
               <p className="section-subtitle">
                Showcasing solutions that balance engineering excellence with intuitive user experience
@@ -536,6 +530,7 @@ export default function Portfolio() {
         <section id="experience">
           <div className="container">
             <div className="fade-in">
+              <p className="section-label">03 — Experience</p>
               <h2 className="section-title">Professional Journey</h2>
               <p className="section-subtitle">
                 Building expertise through diverse hands-on experience across tech, product development, and entrepreneurship.
@@ -572,6 +567,7 @@ export default function Portfolio() {
         <section id="contact" className="contact">
           <div className="container">
             <div className="fade-in">
+              <p className="section-label">04 — Contact</p>
               <h2 className="section-title">Let&apos;s Build Something Amazing</h2>
               <p className="section-subtitle">
                 Ready to collaborate? Let&apos;s connect and create solutions that matter.
