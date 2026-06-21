@@ -104,17 +104,6 @@ const PROJECTS: Project[] = [
     image: "/projects/247hr.png",
   },
   {
-    id: "City Care",
-    title: "City Care — Healthcare Management System",
-    description:
-      "CityCare is a healthcare management system (HMS) designed to digitize and streamline clinical workflows across four user roles: Patients, Clinicians, Lab Technicians, and Administrators. It solves the coordination problem between appointment scheduling, clinical encounters, lab order processing, result verification, billing, and administrative oversight — all within a single platform.",
-    techStack: ["React", "TypeScript", "NestJS", "PostgreSQL", "Prisma"],
-    linkLabel: "View Live Platform",
-    href: "https://csc-419-ca-project.vercel.app/login",
-    note: "*Demo Login - admin@citycare.com / password123",
-    image: "/projects/citycare.png",
-  },
-  {
     id: "DTSLuxe",
     title: "DTSLuxe — Premium Clothing Resale Brand",
     badge: "Co-founder",
@@ -124,6 +113,17 @@ const PROJECTS: Project[] = [
     linkLabel: "Visit Site",
     href: "https://www.dtsluxe.com",
     image: "/projects/dtsluxe.png",
+  },
+  {
+    id: "City Care",
+    title: "City Care — Healthcare Management System",
+    description:
+      "CityCare is a healthcare management system (HMS) designed to digitize and streamline clinical workflows across four user roles: Patients, Clinicians, Lab Technicians, and Administrators. It solves the coordination problem between appointment scheduling, clinical encounters, lab order processing, result verification, billing, and administrative oversight — all within a single platform.",
+    techStack: ["React", "TypeScript", "NestJS", "PostgreSQL", "Prisma"],
+    linkLabel: "View Live Platform",
+    href: "https://csc-419-ca-project.vercel.app/login",
+    note: "*Demo Login - admin@citycare.com / password123",
+    image: "/projects/citycare.png",
   },
   {
     id: "Beta Biz",
@@ -329,6 +329,8 @@ export default function Portfolio() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [activeDot, setActiveDot] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
   const selectedProjectDetail = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
 
   // Dark mode sync
@@ -481,9 +483,12 @@ export default function Portfolio() {
                 <div className="about-content">
                   <h3>Full-Stack Software Engineer</h3>
                   <p>
+                    I built and launched the e-commerce website for DTSLuxe — a premium clothing resale brand — on Shopify, driving conversions and supporting ₦4–₦5M in revenue across 80+ customers.
+                  </p>
+                  <p>
                     Full-Stack Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks.
-                    Skilled in developing reusable UI components, designing REST APIs, and troubleshooting issues across the application stack. 
-                    Experienced in agile, collaborative environments, with strong communication skills and a focus on writing clean, maintainable code. 
+                    Skilled in developing reusable UI components, designing REST APIs, and troubleshooting issues across the application stack.
+                    Experienced in agile, collaborative environments, with strong communication skills and a focus on writing clean, maintainable code.
                   </p>
 
                   <div className="terminal">
@@ -502,14 +507,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              <div className="stats">
-                {STATS.map(({ value, label }) => (
-                  <div className="stat" key={label}>
-                    <span className="stat-number">{value}</span>
-                    <div className="stat-label">{label}</div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
@@ -524,14 +521,59 @@ export default function Portfolio() {
                Showcasing solutions that balance engineering excellence with intuitive user experience
               </p>
 
-              <div className="projects-grid">
-                {PROJECTS.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    onOpenDetails={handleOpenProjectDetails}
-                  />
-                ))}
+              <div className="projects-scroll-wrapper">
+                <div
+                  className="projects-grid"
+                  ref={gridRef}
+                  onScroll={() => {
+                    const el = gridRef.current;
+                    if (!el) return;
+                    const cardWidth = el.scrollWidth / PROJECTS.length;
+                    setActiveDot(Math.round(el.scrollLeft / cardWidth));
+                  }}
+                >
+                  {PROJECTS.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      onOpenDetails={handleOpenProjectDetails}
+                    />
+                  ))}
+                </div>
+                <div
+                  className="projects-scroll-arrow-left"
+                  onClick={() => {
+                    const el = gridRef.current;
+                    if (!el) return;
+                    const cardWidth = el.scrollWidth / PROJECTS.length;
+                    el.scrollBy({ left: -cardWidth, behavior: "smooth" });
+                  }}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M19 12H5M9 18l-6-6 6-6"/>
+                  </svg>
+                </div>
+                <div
+                  className="projects-scroll-arrow"
+                  onClick={() => {
+                    const el = gridRef.current;
+                    if (!el) return;
+                    const cardWidth = el.scrollWidth / PROJECTS.length;
+                    el.scrollBy({ left: cardWidth, behavior: "smooth" });
+                  }}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M15 6l6 6-6 6"/>
+                  </svg>
+                </div>
+                <div className="projects-scroll-dots">
+                  {PROJECTS.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`projects-scroll-dot ${activeDot === i ? "active" : ""}`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
