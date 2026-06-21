@@ -98,6 +98,36 @@ export default function Projects() {
             </Link>
           </div>
         </div>
+        {/* Project 4 */}
+        <div className={styles.projectCard}>
+          <Image
+            src="/projects/project-4.png"
+            alt="DTSLuxe e-commerce website"
+            width={1200}
+            height={675}
+            className={styles.projectImage}
+          />
+
+          <div className={styles.projectContent}>
+            <h3>DTSLuxe</h3>
+
+            <p>
+              A premium clothing resale brand curating sought-after global
+              pieces, serving 80+ customers and generating ₦4–₦5M in revenue.
+              Developed and managed the e-commerce website to drive conversions,
+              while leading sourcing, branding, and growth through social media
+              and influencer collaborations.
+            </p>
+
+            <p className={styles.projectTech}>
+              <strong>Tech Stack:</strong> Shopify
+            </p>
+
+            <Link href="https://www.dtsluxe.com" target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+              Visit Site
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

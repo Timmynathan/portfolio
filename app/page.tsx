@@ -115,6 +115,17 @@ const PROJECTS: Project[] = [
     image: "/projects/citycare.png",
   },
   {
+    id: "DTSLuxe",
+    title: "DTSLuxe — Premium Clothing Resale Brand",
+    badge: "Co-founder",
+    description:
+      "A premium clothing resale brand curating sought-after global pieces, serving 80+ customers and generating ₦4–₦5M in revenue. Developed and managed the e-commerce website to drive conversions, while leading sourcing, branding, and growth through social media and influencer collaborations.",
+    techStack: ["Shopify"],
+    linkLabel: "Visit Site",
+    href: "https://www.dtsluxe.com",
+    image: "/projects/dtsluxe.png",
+  },
+  {
     id: "Beta Biz",
     title: "Beta Biz — A mobile-first AI-powered financial assistant",
     badge: "Payaza Hackathon 2024",
