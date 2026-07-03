@@ -9,7 +9,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Oluwatimilehin | Software Developer",
+  title: "Oluwatimilehin | AI Engineer & Full Stack Developer",
   description: "Personal portfolio website",
 };
 

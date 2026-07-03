@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -12,6 +13,7 @@ interface Project {
   techStack: string[];
   linkLabel: string;
   href?: string;
+  repos?: { label: string; href: string }[];
   note?: string;
   image?: string;
   imageType?: "default" | "mobile";
@@ -20,12 +22,6 @@ interface Project {
   secondary?: boolean;
 }
 
-interface TimelineEntry {
-  date: string;
-  title: string;
-  company: string;
-  description: string;
-}
 
 interface Certification {
   title: string;
@@ -49,18 +45,6 @@ interface ProjectDetail {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const SKILLS = [
-  "Javascript",
-  "Python",
-  "PostgreSQL",
-  "React",
-  "TypeScript",
-  "React Native",
-  "Claude Code",
-  "Docker",
-  "Shopify",
-];
-
 const STATS: Stat[] = [
   { value: "2:1", label: "GRADE" },
   { value: "2", label: "Production Products" },
@@ -78,18 +62,30 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     technicalApproach:
       "The system uses Convolutional Neural Networks (CNNs) built with TensorFlow and trained on public TB datasets. Images are preprocessed and augmented to improve performance. The model is evaluated using standard metrics and enhanced with visualization techniques to highlight the image regions influencing predictions.",
   },
+  "Beta Biz": {
+    overview:
+      "Beta Biz is a mobile-first, AI-powered financial assistant built to act as a virtual business partner for small business owners — accessible from the device they rely on most, their phone. It helps SMEs track cash flow, evaluate business health, and build financial literacy, with the ultimate goal of unlocking access to funding and growth.",
+    challenge:
+      "Many small business owners lack the tools and financial visibility to understand their performance or qualify for funding. Existing accounting software is often too complex, desktop-bound, and disconnected from the day-to-day reality of running a small business.",
+    innovation:
+      "Beta Biz reframes financial management as a guided, mobile-first experience — surfacing tailored daily goals, plain-language insights into business health, and financial-literacy prompts instead of raw spreadsheets, meeting owners where they already are.",
+    technicalApproach:
+      "Built with React Native for a cross-platform mobile experience and a Node.js service layer, Beta Biz was developed for the Payaza Hackathon 2024 with a focus on rapidly prototyping its core cash-flow tracking and business-health features.",
+  },
 };
 
 const PROJECTS: Project[] = [
   {
     id: "RAY DETECT",
     title: "INL Diagnostics — AI-Powered Tuberculosis Detection",
-    badge: "Early Stage Startup",
-    description: "Developed a machine learning system to assist in the early detection of tuberculosis (TB) from chest X-ray images. The project leverages deep learning techniques to classify images as TB-positive or negative, improving diagnostic support and accessibility. It also explores model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
+    badge: "AI Engineer",
+    description: "Developed a machine learning model to assist in the early detection of tuberculosis (TB) from chest X-ray images. The project leverages deep learning techniques to classify images as TB-positive or negative, improving diagnostic support and accessibility. It also explores model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
     techStack: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
     linkLabel: "Visit Platform",
     href: "https://inldiagnostics-ai.vercel.app/",
-    note: "*In active development — launching mid-2026*",
+    repos: [
+      { label: "View Code", href: "https://github.com/Timmynathan/tb-detection-app" },
+    ],
     image: "/projects/tbx.png",
   },
   {
@@ -104,11 +100,26 @@ const PROJECTS: Project[] = [
     image: "/projects/247hr.png",
   },
   {
+    id: "Nonye's Pasta",
+    title: "Nonye's Pasta — E-commerce Store for a Pasta Venture",
+    badge: "Full-Stack Developer & Designer",
+    description:
+      "A full-stack e-commerce store for a registered pasta venture, featuring online ordering, Paystack payment integration, WhatsApp checkout, and Cloudinary-powered product galleries, backed by a Django REST API with an admin dashboard for managing products and orders.",
+    techStack: ["React", "Vite", "Tailwind CSS", "Django", "PostgreSQL", "Paystack"],
+    linkLabel: "Visit Site",
+    href: "https://www.nonyespasta.com",
+    repos: [
+      { label: "Frontend Code", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
+      { label: "Backend Code", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
+    ],
+    image: "/projects/nonyes-pasta.png",
+  },
+  {
     id: "DTSLuxe",
     title: "DTSLuxe — Premium Clothing Resale Brand",
-    badge: "Co-founder",
+    badge: "Shopify Developer",
     description:
-      "A premium clothing resale brand curating sought-after global pieces, serving 80+ customers and generating ₦4–₦5M in revenue. Developed and managed the e-commerce website to drive conversions, while leading sourcing, branding, and growth through social media and influencer collaborations.",
+      "I built and launched the e-commerce website for DTSLuxe — a premium clothing resale brand — on Shopify, driving conversions and supporting ₦4–₦5M in revenue across 80+ customers.",
     techStack: ["Shopify"],
     linkLabel: "Visit Site",
     href: "https://www.dtsluxe.com",
@@ -131,43 +142,9 @@ const PROJECTS: Project[] = [
     badge: "Payaza Hackathon 2024",
     description: "BetaBiz is a powerful virtual business partner accessible right from every business owner's most essential tool—their mobile phone. BetaBiz will empower SMEs by tracking cash flow, evaluating business health, offering tailored daily goals, and financial literacy all with the ultimate aim of unlocking access to funding and helping them grow.",
     techStack: ["React Native", "Node JS"],
-    linkLabel: "",
-    href: "",
-    note: "",
+    linkLabel: "View Details",
     image: "/projects/betabiz.png",
     imageType: "mobile",
-  },
-];
-
-const TIMELINE: TimelineEntry[] = [
-   {
-    date: "April 2025 - Present",
-    title: "Co-founder & Operations Lead",
-    company: "Dtsluxe",
-    description:
-      "Built a premium clothing resale brand curating sought-after global pieces, serving 80+ customers and generating ₦4–₦5M in revenue. Developed and managed the e-commerce website to drive conversions, while leading sourcing, branding, and growth through social media and influencer collaborations.",
-  },
-  {
-    date: "July 2025 - September 2025",
-    title: "IT Intern",
-    company: "Isurf Global Services",
-    description:
-      "Contributed to the development of an HRMS application, being a part of the front-end team used by 100+ applicants, improving usability and workflow efficiency.",
-  },
- 
-  {
-    date: "July 2024 - September 2024",
-    title: "Software Engineer Intern",
-    company: "Cyber fleet",
-    description:
-      "Developed and maintained web and mobile applications using JavaScript, Node.js, and React Native, improving user engagement by 25%",
-  },
-  {
-    date: "2022 - December 2026",
-    title: "Computer Science Student",
-    company: "Pan-Atlantic University",
-    description:
-      "Pursuing a degree in Computer Science while specializing in data structures, algorithms, and full-stack development. Active in tech communities and leadership roles including collaboration with ICT team on AI projects.",
   },
 ];
 
@@ -175,17 +152,38 @@ const TIMELINE: TimelineEntry[] = [
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  // { label: "Certs", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function SkillBubble({ label }: { label: string }) {
-  return <span className="skill-bubble">{label}</span>;
+function GithubIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.13-.3-.54-1.53.11-3.19 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.89.12 3.19.77.84 1.23 1.92 1.23 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22 0 1.6-.01 2.9-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z" />
+    </svg>
+  );
+}
+
+function GlobeIcon() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
 }
 
 function TechTag({ label }: { label: string }) {
@@ -226,7 +224,13 @@ function ProjectCard({
           .join(" ")}
       >
         {hasImage ? (
-          <img src={project.image} alt={`${project.title} Screenshot`} loading="lazy" />
+          <Image
+            src={project.image!}
+            alt={`${project.title} Screenshot`}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+            style={{ objectFit: project.imageType === "mobile" ? "contain" : "cover" }}
+          />
         ) : (
           placeholder
         )}
@@ -252,21 +256,38 @@ function ProjectCard({
           ))}
         </div>
         <div className="project-links">
-          {project.href ? (
-            <span className="project-link">{project.linkLabel}</span>
-          ) : project.linkLabel ? (
+          {project.href && (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              <GlobeIcon />
+              {project.linkLabel}
+            </a>
+          )}
+          {project.repos?.map((repo) => (
+            <a
+              key={repo.href}
+              href={repo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              <GithubIcon />
+              {repo.label}
+            </a>
+          ))}
+          {!project.href && !project.repos && project.linkLabel && (
             <button
               type="button"
               className="project-link project-link-button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onOpenDetails(project.id);
-              }}
+              onClick={() => onOpenDetails(project.id)}
             >
               {project.linkLabel}
             </button>
-          ) : null}
+          )}
         </div>
         {project.note && <p className="project-note">{project.note}</p>}
       </div>
@@ -274,33 +295,7 @@ function ProjectCard({
     </article>
   );
 
-  if (project.href) {
-    return (
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="project-card-link"
-      >
-        {inner}
-      </a>
-    );
-  }
-
   return inner;
-}
-
-function TimelineItem({ entry }: { entry: TimelineEntry }) {
-  return (
-    <article className="timeline-item">
-      <div className="timeline-content">
-        <div className="timeline-date">{entry.date}</div>
-        <h3 className="timeline-title">{entry.title}</h3>
-        <div className="timeline-company">{entry.company}</div>
-        <p className="timeline-description">{entry.description}</p>
-      </div>
-    </article>
-  );
 }
 
 function CertCard({ cert }: { cert: Certification }) {
@@ -324,22 +319,10 @@ function CertCard({ cert }: { cert: Certification }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function Portfolio() {
-  const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [activeDot, setActiveDot] = useState(0);
-  const gridRef = useRef<HTMLDivElement>(null);
   const selectedProjectDetail = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
-
-  // Dark mode sync
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      darkMode ? "dark" : "light"
-    );
-  }, [darkMode]);
 
   // Navbar scroll shadow
   useEffect(() => {
@@ -369,17 +352,6 @@ export default function Portfolio() {
     return () => observerRef.current?.disconnect();
   }, []);
 
-  const handleSendMessage = () => {
-    const { name, email, message } = formData;
-    if (!name || !email || !message) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:oluwatimilehin.nathan@gmail.com?subject=${subject}&body=${body}`;
-  };
-
   const handleOpenProjectDetails = (projectId: string) => {
     if (PROJECT_DETAILS[projectId]) {
       setSelectedProjectId(projectId);
@@ -396,7 +368,7 @@ export default function Portfolio() {
         >
           <div className="container">
             <div className="nav-container">
-              <div className="logo">Nathaniel</div>
+              <div className="logo"></div>
 
               <button
                 className={`mobile-menu-toggle ${menuOpen ? "active" : ""}`}
@@ -420,16 +392,6 @@ export default function Portfolio() {
                   </li>
                 ))}
               </ul>
-
-              <button
-                className="theme-toggle"
-                aria-label="Toggle dark mode"
-                onClick={() => setDarkMode((d) => !d)}
-              >
-                <span className={`icon ${darkMode ? "moon-icon" : "sun-icon"}`}>
-                  {darkMode ? "🌙" : "☀️"}
-                </span>
-              </button>
             </div>
           </div>
         </nav>
@@ -440,73 +402,41 @@ export default function Portfolio() {
         <section id="home" className="hero">
           <div className="container">
             <div className="hero-content fade-in">
-              <p className="hero-eyebrow">Software Developer</p>
-              <h1>Ilesanmi Oluwatimilehin Nathaniel</h1>
-              <p className="tagline">
-                Full-Stack Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks.
-              </p>
-              <div className="hero-buttons">
-                <a href="#projects" className="cta-button magnetic">
-                  View My Work
-                </a>
-                <a
-                  href="mailto:ilesanmitimilehin19@gmail.com?subject=Resume Request&body=Hi Oluwatimilehin, I'd like to request your resume. Thanks!"
-                  className="cta-button cta-button-outline magnetic"
-                >
-                  Request Resume
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── About ── */}
-        <section id="about">
-          <div className="container">
-            <div className="fade-in">
-              <p className="section-label">01 — About</p>
-              <h2 className="section-title">About Me</h2>
-              <p className="section-subtitle">
-                Passionate about technology, focused on building scalable products with real-world impact, and deeply rooted in innovation and 
-                problem-solving
-              </p>
-
-              <div className="about-grid">
-                <div className="about-image">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/profile_photo.png"
-                    alt="Oluwatimilehin Nathaniel"
-                    className="about-photo"
-                  />
-                </div>
-                <div className="about-content">
-                  <h3>Full-Stack Software Engineer</h3>
-                  <p>
-                    I built and launched the e-commerce website for DTSLuxe — a premium clothing resale brand — on Shopify, driving conversions and supporting ₦4–₦5M in revenue across 80+ customers.
-                  </p>
-                  <p>
-                    Full-Stack Software Engineer with 4+ years of experience building scalable web and mobile applications using React, Node.js, and modern JavaScript frameworks.
-                    Skilled in developing reusable UI components, designing REST APIs, and troubleshooting issues across the application stack.
-                    Experienced in agile, collaborative environments, with strong communication skills and a focus on writing clean, maintainable code.
-                  </p>
-
-                  <div className="terminal">
-                    {`const nathaniel = { skills: ["JavaScript", "Python", "React", "Problem Solving"], passion: "Building meaningful tech" };`}
-                    <span className="terminal-cursor">|</span>
-                  </div>
-
-                  <div className="skills-section">
-                    <h4>Core Technologies</h4>
-                    <div className="skills-container">
-                      {SKILLS.map((s) => (
-                        <SkillBubble key={s} label={s} />
-                      ))}
-                    </div>
-                  </div>
+              <div className="hero-text">
+                <h1>Ilesanmi Oluwatimilehin Nathaniel</h1>
+                <p className="hero-role">AI Engineer & Full Stack Developer</p>
+                <p className="hero-description">
+                  I&apos;m Ilesanmi Oluwatimilehin, an AI Engineer and Full-Stack Developer with 4+ years of
+                  experience building production-ready applications. My work spans deep learning and computer
+                  vision (CNNs, DenseNet, TensorFlow) with model explainability through Grad-CAM, alongside
+                  full-stack web and mobile development across React, TypeScript, Next.js, Node.js, and Python.
+                  I&apos;ve shipped products across healthcare, HR, and e-commerce — from an AI tuberculosis-detection
+                  tool for clinics in sub-Saharan Africa to HR platforms used by 30+ companies — and I&apos;m passionate
+                  about building technology for real social impact in Africa.
+                </p>
+                <div className="hero-buttons">
+                  <a href="#projects" className="cta-button magnetic">
+                    View My Work
+                  </a>
+                  <a
+                    href="mailto:ilesanmitimilehin19@gmail.com?subject=Resume Request&body=Hi Oluwatimilehin, I'd like to request your resume. Thanks!"
+                    className="cta-button cta-button-outline magnetic"
+                  >
+                    Request Resume
+                  </a>
                 </div>
               </div>
-
+              <div className="hero-photo">
+                <Image
+                  src="/images/profile_photo.png"
+                  alt="Ilesanmi Oluwatimilehin Nathaniel"
+                  fill
+                  sizes="(max-width: 1024px) 240px, 220px"
+                  priority
+                  className="hero-photo-img"
+                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -515,83 +445,18 @@ export default function Portfolio() {
         <section id="projects" className="projects">
           <div className="container">
             <div className="fade-in">
-              <p className="section-label">02 — Work</p>
               <h2 className="section-title">Featured Projects</h2>
               <p className="section-subtitle">
                Showcasing solutions that balance engineering excellence with intuitive user experience
               </p>
 
-              <div className="projects-scroll-wrapper">
-                <div
-                  className="projects-grid"
-                  ref={gridRef}
-                  onScroll={() => {
-                    const el = gridRef.current;
-                    if (!el) return;
-                    const cardWidth = el.scrollWidth / PROJECTS.length;
-                    setActiveDot(Math.round(el.scrollLeft / cardWidth));
-                  }}
-                >
-                  {PROJECTS.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      onOpenDetails={handleOpenProjectDetails}
-                    />
-                  ))}
-                </div>
-                <div
-                  className="projects-scroll-arrow-left"
-                  onClick={() => {
-                    const el = gridRef.current;
-                    if (!el) return;
-                    const cardWidth = el.scrollWidth / PROJECTS.length;
-                    el.scrollBy({ left: -cardWidth, behavior: "smooth" });
-                  }}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M19 12H5M9 18l-6-6 6-6"/>
-                  </svg>
-                </div>
-                <div
-                  className="projects-scroll-arrow"
-                  onClick={() => {
-                    const el = gridRef.current;
-                    if (!el) return;
-                    const cardWidth = el.scrollWidth / PROJECTS.length;
-                    el.scrollBy({ left: cardWidth, behavior: "smooth" });
-                  }}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M15 6l6 6-6 6"/>
-                  </svg>
-                </div>
-                <div className="projects-scroll-dots">
-                  {PROJECTS.map((_, i) => (
-                    <div
-                      key={i}
-                      className={`projects-scroll-dot ${activeDot === i ? "active" : ""}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Experience ── */}
-        <section id="experience">
-          <div className="container">
-            <div className="fade-in">
-              <p className="section-label">03 — Experience</p>
-              <h2 className="section-title">Professional Journey</h2>
-              <p className="section-subtitle">
-                Building expertise through diverse hands-on experience across tech, product development, and entrepreneurship.
-              </p>
-
-              <div className="experience-timeline">
-                {TIMELINE.map((entry) => (
-                  <TimelineItem key={entry.date + entry.company} entry={entry} />
+              <div className="projects-grid">
+                {PROJECTS.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onOpenDetails={handleOpenProjectDetails}
+                  />
                 ))}
               </div>
             </div>
@@ -620,74 +485,12 @@ export default function Portfolio() {
         <section id="contact" className="contact">
           <div className="container">
             <div className="fade-in">
-              <p className="section-label">04 — Contact</p>
-              <h2 className="section-title">Let&apos;s Build Something Amazing</h2>
-              <p className="section-subtitle">
-                Ready to collaborate? Let&apos;s connect and create solutions that matter.
+              <p className="contact-message">
+                Let&apos;s connect — I&apos;m always open to new opportunities and collaborations.
               </p>
-
-              {/* NOTE: <form> removed intentionally — use controlled state + mailto handler */}
-              <div className="contact-form">
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData((f) => ({ ...f, name: e.target.value }))
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData((f) => ({ ...f, email: e.target.value }))
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    required
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData((f) => ({ ...f, message: e.target.value }))
-                    }
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleSendMessage}
-                  className="cta-button cta-button-full"
-                >
-                  Send Message
-                </button>
-                <p className="contact-email">
-                  Or email me directly at{" "}
-                  <a href="mailto:ilesanmitimilehin19@gmail.com">
-                    oluwatimilehin.nathan@gmail.com
-                  </a>
-                </p>
-              </div>
-
               <div className="social-links">
                 <a
-                  href="mailto:ilesanmitimilehin19@gmail.com"
+                  href="mailto:oluwatimilehin.nathan@gmail.com"
                   className="social-link"
                   title="Email"
                   aria-label="Send email"
