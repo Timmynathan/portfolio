@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import { SiPython, SiReact, SiDjango, SiTensorflow, SiTypescript, SiNodedotjs } from "react-icons/si";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -11,6 +13,7 @@ interface Project {
   description: string;
   badge?: string;
   techStack: string[];
+  mainStack?: string;
   linkLabel: string;
   href?: string;
   repos?: { label: string; href: string }[];
@@ -62,93 +65,64 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     technicalApproach:
       "The system uses Convolutional Neural Networks (CNNs) built with TensorFlow and trained on public TB datasets. Images are preprocessed and augmented to improve performance. The model is evaluated using standard metrics and enhanced with visualization techniques to highlight the image regions influencing predictions.",
   },
-  "Beta Biz": {
-    overview:
-      "Beta Biz is a mobile-first, AI-powered financial assistant built to act as a virtual business partner for small business owners — accessible from the device they rely on most, their phone. It helps SMEs track cash flow, evaluate business health, and build financial literacy, with the ultimate goal of unlocking access to funding and growth.",
-    challenge:
-      "Many small business owners lack the tools and financial visibility to understand their performance or qualify for funding. Existing accounting software is often too complex, desktop-bound, and disconnected from the day-to-day reality of running a small business.",
-    innovation:
-      "Beta Biz reframes financial management as a guided, mobile-first experience — surfacing tailored daily goals, plain-language insights into business health, and financial-literacy prompts instead of raw spreadsheets, meeting owners where they already are.",
-    technicalApproach:
-      "Built with React Native for a cross-platform mobile experience and a Node.js service layer, Beta Biz was developed for the Payaza Hackathon 2024 with a focus on rapidly prototyping its core cash-flow tracking and business-health features.",
-  },
 };
 
 const PROJECTS: Project[] = [
   {
     id: "RAY DETECT",
-    title: "INL Diagnostics — AI-Powered Tuberculosis Detection",
-    badge: "AI Engineer",
-    description: "Developed a machine learning model to assist in the early detection of tuberculosis (TB) from chest X-ray images. The project leverages deep learning techniques to classify images as TB-positive or negative, improving diagnostic support and accessibility. It also explores model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
+    title: "TB Detect AI — AI-Powered Tuberculosis Detection",
+    description: "An AI-powered tool that assists in the early detection of tuberculosis (TB) from chest X-ray images. It uses deep learning to classify scans as TB-positive or negative, improving diagnostic support and accessibility, while also ensuring model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
     techStack: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
+    mainStack: "TensorFlow",
     linkLabel: "Visit Platform",
     href: "https://inldiagnostics-ai.vercel.app/",
     repos: [
       { label: "View Code", href: "https://github.com/Timmynathan/tb-detection-app" },
-    ],
-    image: "/projects/tbx.png",
-  },
+    ],  },
   {
     id: "247HR",
     title: "247HR — Unified platform for end-to-end HR management",
-    badge: "Isurf Global Services",
     description: "247HR is an all-in-one HR management platform that streamlines and automates the entire employee lifecycle from recruitment to payroll and analytics.",
     techStack: ["React", "MUI", "Docker"],
+    mainStack: "React",
     linkLabel: "View Live Platform",
     href: "https://247hr.co.uk/",
-    note: "*Production platform — code not publicly available*",
-    image: "/projects/247hr.png",
-  },
+    note: "*Production platform — code not publicly available*",  },
   {
     id: "Nonye's Pasta",
     title: "Nonye's Pasta — E-commerce Store for a Pasta Venture",
-    badge: "Full-Stack Developer & Designer",
     description:
-      "A full-stack e-commerce store for a registered pasta venture, featuring online ordering, Paystack payment integration, WhatsApp checkout, and Cloudinary-powered product galleries, backed by a Django REST API with an admin dashboard for managing products and orders.",
+      "A full-stack e-commerce store for a registered pasta venture serving 200+ customers, featuring online ordering, Paystack payment integration, WhatsApp checkout, and Cloudinary-powered product galleries, backed by a Django REST API with an admin dashboard for managing products and orders.",
     techStack: ["React", "Vite", "Tailwind CSS", "Django", "PostgreSQL", "Paystack"],
+    mainStack: "Django",
     linkLabel: "Visit Site",
     href: "https://www.nonyespasta.com",
     repos: [
       { label: "Frontend Code", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
       { label: "Backend Code", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
-    ],
-    image: "/projects/nonyes-pasta.png",
-  },
-  {
-    id: "DTSLuxe",
-    title: "DTSLuxe — Premium Clothing Resale Brand",
-    badge: "Shopify Developer",
-    description:
-      "I built and launched the e-commerce website for DTSLuxe — a premium clothing resale brand — on Shopify, driving conversions and supporting ₦4–₦5M in revenue across 80+ customers.",
-    techStack: ["Shopify"],
-    linkLabel: "Visit Site",
-    href: "https://www.dtsluxe.com",
-    image: "/projects/dtsluxe.png",
-  },
+    ],  },
   {
     id: "City Care",
     title: "City Care — Healthcare Management System",
     description:
       "CityCare is a healthcare management system (HMS) designed to digitize and streamline clinical workflows across four user roles: Patients, Clinicians, Lab Technicians, and Administrators. It solves the coordination problem between appointment scheduling, clinical encounters, lab order processing, result verification, billing, and administrative oversight — all within a single platform.",
     techStack: ["React", "TypeScript", "NestJS", "PostgreSQL", "Prisma"],
+    mainStack: "TypeScript",
     linkLabel: "View Live Platform",
     href: "https://csc-419-ca-project.vercel.app/login",
-    note: "*Demo Login - admin@citycare.com / password123",
-    image: "/projects/citycare.png",
-  },
-  {
-    id: "Beta Biz",
-    title: "Beta Biz — A mobile-first AI-powered financial assistant",
-    badge: "Payaza Hackathon 2024",
-    description: "BetaBiz is a powerful virtual business partner accessible right from every business owner's most essential tool—their mobile phone. BetaBiz will empower SMEs by tracking cash flow, evaluating business health, offering tailored daily goals, and financial literacy all with the ultimate aim of unlocking access to funding and helping them grow.",
-    techStack: ["React Native", "Node JS"],
-    linkLabel: "View Details",
-    image: "/projects/betabiz.png",
-    imageType: "mobile",
-  },
+    note: "*Demo Login - admin@citycare.com / password123",  },
 ];
 
-// const CERTIFICATIONS: Certification[] = [];
+const CERTIFICATIONS: Certification[] = [
+  {
+    title: "Claude Code in Action",
+    issuer: "Anthropic",
+    date: "July 2026",
+    description:
+      "Verified practitioner in configuring, customising, securing, and automating Claude Code in real development workflows — from local dev environments to CI/CD pipelines.",
+    verifyUrl: "https://verify.skilljar.com/c/44waskeh3csi",
+  },
+];
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -157,6 +131,15 @@ const NAV_LINKS = [
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
+
+const STACK_ICONS: Record<string, { Icon: IconType; color: string; label: string }> = {
+  Python: { Icon: SiPython, color: "#3776AB", label: "Python" },
+  TensorFlow: { Icon: SiTensorflow, color: "#FF6F00", label: "TensorFlow" },
+  React: { Icon: SiReact, color: "#61DAFB", label: "React" },
+  Django: { Icon: SiDjango, color: "#0C4B33", label: "Django" },
+  TypeScript: { Icon: SiTypescript, color: "#3178C6", label: "TypeScript" },
+  "Node.js": { Icon: SiNodedotjs, color: "#5FA04E", label: "Node.js" },
+};
 
 function GithubIcon() {
   return (
@@ -197,10 +180,7 @@ function ProjectCard({
   project: Project;
   onOpenDetails: (projectId: string) => void;
 }) {
-  const hasImage = Boolean(project.image);
-  const placeholder = project.id
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const stack = project.mainStack ? STACK_ICONS[project.mainStack] : undefined;
 
   const inner = (
     <article
@@ -213,29 +193,12 @@ function ProjectCard({
         .join(" ")}
       onClick={project.onClick}
     >
-      <div
-        className={[
-          "project-image",
-          project.featured ? "project-image-featured" : "",
-          project.secondary ? "project-image-secondary" : "",
-          project.imageType === "mobile" ? "project-image-mobile" : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        {hasImage ? (
-          <Image
-            src={project.image!}
-            alt={`${project.title} Screenshot`}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
-            style={{ objectFit: project.imageType === "mobile" ? "contain" : "cover" }}
-          />
-        ) : (
-          placeholder
-        )}
-      </div>
       <div className="project-content">
+        {stack && (
+          <div className="project-stack-icon" style={{ color: stack.color }} title={stack.label}>
+            <stack.Icon />
+          </div>
+        )}
         {project.badge && (
           <div
             className={[
@@ -300,18 +263,24 @@ function ProjectCard({
 
 function CertCard({ cert }: { cert: Certification }) {
   return (
-    <div className="stat">
+    <div className="cert-card">
+      <div className="cert-card-head">
+        <h3 className="cert-title">{cert.title}</h3>
+        <span className="cert-badge">Completed</span>
+      </div>
+      <div className="cert-meta">
+        {cert.issuer} · {cert.date}
+      </div>
+      <p className="cert-description">{cert.description}</p>
       <a
         href={cert.verifyUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="stat-number"
+        className="project-link cert-link"
       >
-        {cert.title}
+        <GlobeIcon />
+        Verify Credential
       </a>
-      <div className="stat-label">{cert.issuer}</div>
-      <div className="stat-label">{cert.date}</div>
-      <p className="stat-label">{cert.description}</p>
     </div>
   );
 }
@@ -402,40 +371,40 @@ export default function Portfolio() {
         <section id="home" className="hero">
           <div className="container">
             <div className="hero-content fade-in">
-              <div className="hero-text">
-                <h1>Ilesanmi Oluwatimilehin Nathaniel</h1>
-                <p className="hero-role">AI Engineer & Full Stack Developer</p>
-                <p className="hero-description">
-                  I&apos;m Ilesanmi Oluwatimilehin, an AI Engineer and Full-Stack Developer with 4+ years of
-                  experience building production-ready applications. My work spans deep learning and computer
-                  vision (CNNs, DenseNet, TensorFlow) with model explainability through Grad-CAM, alongside
-                  full-stack web and mobile development across React, TypeScript, Next.js, Node.js, and Python.
-                  I&apos;ve shipped products across healthcare, HR, and e-commerce — from an AI tuberculosis-detection
-                  tool for clinics in sub-Saharan Africa to HR platforms used by 30+ companies — and I&apos;m passionate
-                  about building technology for real social impact in Africa.
-                </p>
-                <div className="hero-buttons">
-                  <a href="#projects" className="cta-button magnetic">
-                    View My Work
-                  </a>
-                  <a
-                    href="mailto:ilesanmitimilehin19@gmail.com?subject=Resume Request&body=Hi Oluwatimilehin, I'd like to request your resume. Thanks!"
-                    className="cta-button cta-button-outline magnetic"
-                  >
-                    Request Resume
-                  </a>
-                </div>
-              </div>
               <div className="hero-photo">
                 <Image
                   src="/images/profile_photo.png"
                   alt="Ilesanmi Oluwatimilehin Nathaniel"
                   fill
-                  sizes="(max-width: 1024px) 240px, 220px"
+                  sizes="130px"
                   priority
                   className="hero-photo-img"
                   style={{ objectFit: "cover", objectPosition: "center top" }}
                 />
+              </div>
+              <p className="hero-greeting">Hi There! <span className="hero-wave">👋</span></p>
+              <h1 className="hero-name">
+                I&apos;m <span className="hero-name-accent">Ilesanmi Oluwatimilehin</span>
+              </h1>
+              <p className="hero-role">Full Stack Developer</p>
+              <p className="hero-description">
+                I&apos;m Ilesanmi Oluwatimilehin, an AI Engineer and Full-Stack Developer with 4+ years of
+                experience building production-ready applications. My work spans deep learning and computer
+                vision (CNNs, DenseNet, TensorFlow), alongside full-stack web and mobile development.
+                I&apos;ve shipped products across healthcare, HR, and e-commerce — from an AI tuberculosis-detection
+                tool for clinics in sub-Saharan Africa to HR platforms used by 30+ companies — and I&apos;m passionate
+                about building technology for real social impact in Africa.
+              </p>
+              <div className="hero-buttons">
+                <a href="#projects" className="cta-button magnetic">
+                  View My Work
+                </a>
+                <a
+                  href="mailto:ilesanmitimilehin19@gmail.com?subject=Resume Request&body=Hi Oluwatimilehin, I'd like to request your resume. Thanks!"
+                  className="cta-button cta-button-outline magnetic"
+                >
+                  Request Resume
+                </a>
               </div>
             </div>
           </div>
@@ -463,8 +432,8 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* ── Certifications ──
-        <section id="certifications">
+        {/* ── Certifications ── */}
+        <section id="certifications" className="certifications">
           <div className="container">
             <div className="fade-in">
               <h2 className="section-title">Certifications</h2>
@@ -472,14 +441,14 @@ export default function Portfolio() {
                 Continuous learning in AI tooling and modern development workflows
               </p>
 
-              <div className="stats">
+              <div className="cert-grid">
                 {CERTIFICATIONS.map((cert) => (
                   <CertCard key={cert.title} cert={cert} />
                 ))}
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* ── Contact ── */}
         <section id="contact" className="contact">
