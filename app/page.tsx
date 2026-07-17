@@ -96,7 +96,7 @@ const PROJECTS: Project[] = [
     techStack: ["React", "Vite", "Tailwind CSS", "Django", "PostgreSQL", "Paystack"],
     mainStack: "Django",
     linkLabel: "Visit Site",
-    href: "https://nonyes-pasta-frontend.vercel.app/",
+    href: "https://nonyespasta.com/",
     repos: [
       { label: "Frontend Code", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
       { label: "Backend Code", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
