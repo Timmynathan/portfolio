@@ -16,6 +16,7 @@ interface Project {
   mainStack?: string;
   linkLabel: string;
   href?: string;
+  videoUrl?: string;
   repos?: { label: string; href: string }[];
   note?: string;
   image?: string;
@@ -69,7 +70,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
 
 const PROJECTS: Project[] = [
   {
-    id: "RAY DETECT",
+    id: "TB DETECT",
     title: "TB Detect AI — AI-Powered Tuberculosis Detection",
     description: "An AI-powered tool that assists in the early detection of tuberculosis (TB) from chest X-ray images. It uses deep learning to classify scans as TB-positive or negative, improving diagnostic support and accessibility, while also ensuring model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
     techStack: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
@@ -79,6 +80,18 @@ const PROJECTS: Project[] = [
     repos: [
       { label: "View Code", href: "https://github.com/Timmynathan/tb-detection-app" },
     ],  },
+
+    {
+    id: "MoveIn Rental App",
+    title: "MoveIn — Rental Platform",
+    description: "A full-stack rental platform for flexible-length stays in Nigeria. Landlords create, edit, publish, and manage listings with photo uploads; guests browse and search including a voice-search flow that parses natural speech into location/bedroom/price filters — view listings on an interactive map, save favorites, and contact landlords directly via WhatsApp. Built with a FastAPI/PostgreSQL backend (Supabase for auth, storage, and the database) and a React/TypeScript frontend, with a Redis caching layer added to cut cross-region query latency and role-based access control enforced end-to-end for landlord-owned data.",
+    techStack: ["React", "TypeScript", "Supabase", "FastAPI", "PostgreSQL", "Redis"],
+    mainStack: "React",
+    linkLabel: "Watch Demo",
+    videoUrl: "https://www.loom.com/share/842aa2bef16f400d9d317edef4a61292",
+    repos: [{ label: "View Code", href: "https://github.com/Timmynathan/movein-rental-app" }, ],
+    },
+
   {
     id: "247HR",
     title: "247HR — Unified platform for end-to-end HR management",
@@ -185,9 +198,11 @@ function TechTag({ label }: { label: string }) {
 function ProjectCard({
   project,
   onOpenDetails,
+  onOpenVideo,
 }: {
   project: Project;
   onOpenDetails: (projectId: string) => void;
+  onOpenVideo: (videoUrl: string) => void;
 }) {
   const stack = project.mainStack ? STACK_ICONS[project.mainStack] : undefined;
 
@@ -228,6 +243,16 @@ function ProjectCard({
           ))}
         </div>
         <div className="project-links">
+          {project.videoUrl && (
+            <button
+              type="button"
+              className="project-link project-link-button"
+              onClick={() => onOpenVideo(project.videoUrl!)}
+            >
+              <GlobeIcon />
+              {project.linkLabel}
+            </button>
+          )}
           {project.href && (
             <a
               href={project.href}
@@ -301,6 +326,7 @@ export default function Portfolio() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const selectedProjectDetail = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState<string | null>(null);
 
   // Navbar scroll shadow
   useEffect(() => {
@@ -335,6 +361,10 @@ export default function Portfolio() {
       setSelectedProjectId(projectId);
     }
   };
+
+  const videoEmbedUrl = selectedVideoUrl
+    ? selectedVideoUrl.replace("/share/", "/embed/")
+    : null;
 
   return (
     <>
@@ -434,6 +464,7 @@ export default function Portfolio() {
                     key={project.id}
                     project={project}
                     onOpenDetails={handleOpenProjectDetails}
+                    onOpenVideo={setSelectedVideoUrl}
                   />
                 ))}
               </div>
@@ -513,7 +544,7 @@ export default function Portfolio() {
           background: none;
           border: none;
           padding: 0;
-          font: inherit;
+          font-family: inherit;
           text-align: left;
         }
 
@@ -571,6 +602,43 @@ export default function Portfolio() {
           color: var(--color-text);
           padding: 4px;
         }
+
+        .video-modal {
+          width: min(960px, 100%);
+          background: #000;
+          border-radius: 16px;
+          padding: 0;
+          overflow: hidden;
+        }
+
+        .video-modal-frame {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+        }
+
+        .video-modal-frame iframe {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+
+        .video-modal-close {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: rgba(0, 0, 0, 0.6);
+          border: none;
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          font-size: 22px;
+          line-height: 1;
+          color: #fff;
+          z-index: 1;
+        }
       `}</style>
       {selectedProjectDetail && (
         <div
@@ -605,6 +673,37 @@ export default function Portfolio() {
 
             <h3>Technical Approach</h3>
             <p>{selectedProjectDetail.technicalApproach}</p>
+          </div>
+        </div>
+      )}
+      {videoEmbedUrl && (
+        <div
+          className="project-modal-overlay"
+          onClick={() => setSelectedVideoUrl(null)}
+          role="presentation"
+        >
+          <div
+            className="video-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Project demo video"
+          >
+            <button
+              type="button"
+              className="video-modal-close"
+              aria-label="Close video"
+              onClick={() => setSelectedVideoUrl(null)}
+            >
+              ×
+            </button>
+            <div className="video-modal-frame">
+              <iframe
+                src={videoEmbedUrl}
+                allow="fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       )}
