@@ -92,16 +92,7 @@ const PROJECTS: Project[] = [
     repos: [{ label: "View Code", href: "https://github.com/Timmynathan/movein-rental-app" }, ],
     },
 
-  {
-    id: "247HR",
-    title: "247HR — Unified platform for end-to-end HR management",
-    description: "247HR is an all-in-one HR management platform that streamlines and automates the entire employee lifecycle from recruitment to payroll and analytics.",
-    techStack: ["React", "MUI", "Docker"],
-    mainStack: "React",
-    linkLabel: "View Live Platform",
-    href: "https://247hr.co.uk/",
-    note: "*Production platform — code not publicly available*",  },
-  {
+     {
     id: "Nonye's Pasta",
     title: "Nonye's Pasta — E-commerce Store for a Pasta Venture",
     description:
@@ -114,6 +105,17 @@ const PROJECTS: Project[] = [
       { label: "Frontend Code", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
       { label: "Backend Code", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
     ],  },
+  
+  {
+    id: "247HR",
+    title: "247HR — Unified platform for end-to-end HR management",
+    description: "247HR is an all-in-one HR management platform that streamlines and automates the entire employee lifecycle from recruitment to payroll and analytics.",
+    techStack: ["React", "MUI", "Docker"],
+    mainStack: "React",
+    linkLabel: "View Live Platform",
+    href: "https://247hr.co.uk/",
+    note: "*Production platform — code not publicly available*",  },
+ 
   {
     id: "City Care",
     title: "City Care — Healthcare Management System",
