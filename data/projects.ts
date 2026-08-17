@@ -33,8 +33,8 @@ export const PROJECTS: Project[] = [
     linkLabel: "Visit Site",
     href: "https://nonyespasta.com/",
     repos: [
-      { label: "Frontend", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
-      { label: "Backend", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
+      { label: "Frontend Code", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
+      { label: "Backend Code", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
     ],
   },
   {
