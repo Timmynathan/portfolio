@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     description:
       "A full-stack rental platform for flexible-length stays in Nigeria. Landlords create, edit, publish, and manage listings with photo uploads; guests browse and search including a voice-search flow that parses natural speech into location/bedroom/price filters — view listings on an interactive map, save favorites, and contact landlords directly via WhatsApp. Built with a FastAPI/PostgreSQL backend (Supabase for auth, storage, and the database) and a React/TypeScript frontend, with a Redis caching layer added to cut cross-region query latency and role-based access control enforced end-to-end for landlord-owned data.",
     techStack: ["React", "TypeScript", "Supabase", "FastAPI", "PostgreSQL", "Redis"],
-    mainStack: "React",
+    mainStack: "TypeScript",
     linkLabel: "Watch Demo",
     videoUrl: "https://www.loom.com/share/842aa2bef16f400d9d317edef4a61292",
     repos: [{ label: "View Code", href: "https://github.com/Timmynathan/movein-rental-app" }],
