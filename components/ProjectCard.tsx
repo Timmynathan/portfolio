@@ -1,7 +1,7 @@
 import type { Project } from "@/types";
 import { STACK_ICONS } from "@/data/stack-icons";
 import { TechTag } from "@/components/TechTag";
-import { GithubIcon, GlobeIcon } from "@/components/icons";
+import { GithubIcon, GlobeIcon, PlayIcon } from "@/components/icons";
 
 export function ProjectCard({
   project,
@@ -47,7 +47,7 @@ export function ProjectCard({
               className="project-link project-link-button"
               onClick={() => onOpenVideo(project.videoUrl!)}
             >
-              <GlobeIcon />
+              <PlayIcon />
               {project.linkLabel}
             </button>
           )}

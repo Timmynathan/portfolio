@@ -6,6 +6,14 @@ export function GithubIcon() {
   );
 }
 
+export function PlayIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  );
+}
+
 export function GlobeIcon() {
   return (
     <svg
