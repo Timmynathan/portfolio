@@ -101,8 +101,15 @@ export default function AboutPage() {
               <h2 className="section-title">A Few Snapshots</h2>
               <div className="about-gallery">
                 {ABOUT_PHOTOS.map((photo) => (
-                  // eslint-disable-next-line @next/next/no-img-element -- natural intrinsic size, no forced crop box
-                  <img key={photo.src} src={photo.src} alt={photo.alt} className="about-gallery-item" loading="lazy" />
+                  <div key={photo.src} className="about-gallery-item">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 900px) 33vw, 25vw"
+                      style={{ objectFit: "cover", objectPosition: photo.position ?? "center" }}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
