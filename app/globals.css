@@ -878,22 +878,6 @@ main section, section { padding: 6rem 0; }
     .about-gallery { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
 }
 
-/* --------------------------------------------------------------------------
-   Contact  —  always dark, never flips with theme
-   -------------------------------------------------------------------------- */
-.contact {
-    background: var(--ink);
-    color: var(--ink-text);
-}
-
-.contact .fade-in { text-align: center; }
-
-.contact .section-label    { color: rgba(255,255,255,0.35); }
-.contact .section-label::before,
-.contact .section-label::after { background: rgba(255,255,255,0.12); }
-.contact .section-title    { color: #ffffff; }
-.contact .section-subtitle { color: var(--ink-muted); }
-
 .contact-form { max-width: 520px; margin: 0 auto; }
 
 .form-group { margin-bottom: 1.25rem; }
@@ -928,18 +912,6 @@ main section, section { padding: 6rem 0; }
 
 .form-group input:focus,
 .form-group textarea:focus { border-color: rgba(255,255,255,0.35); }
-
-.contact .cta-button {
-    background: #ffffff;
-    color: var(--ink);
-    border-color: #ffffff;
-}
-
-.contact .cta-button:hover {
-    background: transparent;
-    color: #ffffff;
-    border-color: rgba(255,255,255,0.5);
-}
 
 /* Social links inside contact */
 .contact-message {
@@ -1005,12 +977,18 @@ main section, section { padding: 6rem 0; }
 footer {
     background: var(--ink-mid);
     color: rgba(255,255,255,0.35);
-    padding: 1.5rem 0;
+    padding: 4rem 0 1.5rem;
     text-align: center;
     font-size: 0.78rem;
     border-top: 1px solid rgba(255,255,255,0.06);
     font-family: var(--font-sans);
     letter-spacing: 0.02em;
+}
+
+.footer-copyright {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 footer a {
