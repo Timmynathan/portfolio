@@ -44,18 +44,20 @@ export default function AboutPage() {
               <div className="about-hero-text">
 
                 <p className="about-bio">
-                  I&apos;m Nathaniel, but most of my friends call me Timmy (a shorter version of my name,
-                  Oluwatimilehin) :) I&apos;m a software engineer with 2+ years of experience building
-                  production-ready applications. My work spans deep learning and computer vision (CNNs,
-                  DenseNet, TensorFlow), full-stack web and mobile development, and I&apos;m currently
-                  focused on building AI agents that take over the repetitive work businesses run on.
+                  I&apos;m Nathaniel, but most of my friends call me Timmy. I&apos;m a software engineer with
+                  2+ years of experience building production-ready applications. My work spans Machine
+                  learning/computer vision, Agentic AI, as well as full-stack web and mobile development.
+                </p>
+                <p className="about-bio">
+                  I&apos;m currently focused on building AI agents that take over the repetitive work
+                  businesses run on.
                 </p>
                 <p className="about-bio">
                   I&apos;ve shipped products across healthcare, HR, and e-commerce. I care about building
-                  technology that has a real, tangible impact in Africa.
+                  technology that has a real, tangible impact.
                 </p>
                 <p className="about-bio">
-                  Outside of work, I&apos;m usually on a basketball court, spending time with my dog or in
+                  Outside of work, I&apos;m usually on the basketball court, spending time with my dog in
                   nature, or catching up on what&apos;s happening in fintech. There are a few snapshots
                   below!
                 </p>
