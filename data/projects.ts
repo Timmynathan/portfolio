@@ -33,6 +33,20 @@ export const PROJECTS: Project[] = [
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/nonyes-pasta-backend" }],
   },
   {
+    id: "Proposally",
+    title: "Proposally",
+    shortDescription: "An AI business proposal generator; upload docs, paste meeting notes, or speak.",
+    meta: "2026 · Full-Stack Development, AI Agents",
+    description:
+      "An internal tool that turns discovery-call notes into a drafted proposal, then keeps a human in control the whole way: intake, AI drafting, per-section regeneration, a separate reviewer's approval, and client delivery, with every step logged. Claude writes prose, never commitments — price, scope, and timeline are copied verbatim from the intake form, and the app programmatically verifies they appear unmodified in the model's output rather than trusting the prompt. A missing required field renders as an explicit marker, and a Postgres trigger physically blocks sending until it's filled in, so the approval gate lives in the database rather than behind a hidden button. Sonnet 5 drafts the initial proposal; Haiku 4.5 handles fast per-section regeneration. Internal reviewer and decision emails are best-effort and never block a real approval — the deliberate opposite of the client-delivery email, where the send itself is the point.",
+    techStack: ["React", "TypeScript", "Vercel", "Supabase", "Claude", "Resend"],
+    mainStack: "TypeScript",
+    image: "/images/projects/proposally.png",
+    linkLabel: "Website",
+    href: "https://proposally.vercel.app/",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/Proposally" }],
+  },
+  {
     id: "MoveIn Rental App",
     title: "MoveIn",
     shortDescription:
