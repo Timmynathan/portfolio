@@ -4,7 +4,7 @@ export function Contact() {
       <div className="container">
         <div className="fade-in">
           <p className="contact-message">
-            Let&apos;s connect — I&apos;m always open to new opportunities and collaborations.
+            Let&apos;s connect! I&apos;m always open to new opportunities and collaborations.
           </p>
           <div className="social-links">
             <a href="mailto:oluwatimilehin.nathan@gmail.com" className="social-link" title="Email" aria-label="Send email">

@@ -1,17 +1,15 @@
+import Image from "next/image";
 import type { Project } from "@/types";
-import { STACK_ICONS } from "@/data/stack-icons";
 import { TechTag } from "@/components/TechTag";
 import { GithubIcon, GlobeIcon, PlayIcon } from "@/components/icons";
 
 export function ProjectCard({
   project,
-  onOpenVideo,
+  onOpenDetails,
 }: {
   project: Project;
-  onOpenVideo: (videoUrl: string) => void;
+  onOpenDetails: (project: Project) => void;
 }) {
-  const stack = project.mainStack ? STACK_ICONS[project.mainStack] : undefined;
-
   return (
     <article
       className={[
@@ -21,35 +19,40 @@ export function ProjectCard({
       ]
         .filter(Boolean)
         .join(" ")}
+      onClick={() => onOpenDetails(project)}
     >
-      <div className="project-content">
-        {stack && (
-          <div className="project-stack-icon" style={{ color: stack.color }} title={stack.label}>
-            <stack.Icon />
+      {project.image && (
+        <div className="project-image">
+          <div className="project-image-frame">
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              sizes="(max-width: 640px) 45vw, 350px"
+              style={{ objectFit: project.imageFit ?? "cover" }}
+            />
           </div>
-        )}
+        </div>
+      )}
+      <div className="project-content">
         {project.badge && (
           <div className={["project-badge", project.secondary ? "project-badge-secondary" : ""].filter(Boolean).join(" ")}>
             {project.badge}
           </div>
         )}
         <h3 className="project-title">{project.title}</h3>
-        <p className="project-description">{project.description}</p>
+        <p className="project-description">{project.shortDescription ?? project.description}</p>
         <div className="tech-stack">
           {project.techStack.map((t) => (
             <TechTag key={t} label={t} />
           ))}
         </div>
-        <div className="project-links">
+        <div className="project-links" onClick={(e) => e.stopPropagation()}>
           {project.videoUrl && (
-            <button
-              type="button"
-              className="project-link project-link-button"
-              onClick={() => onOpenVideo(project.videoUrl!)}
-            >
+            <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="project-link">
               <PlayIcon />
               {project.linkLabel}
-            </button>
+            </a>
           )}
           {project.href && (
             <a href={project.href} target="_blank" rel="noopener noreferrer" className="project-link">
@@ -64,7 +67,6 @@ export function ProjectCard({
             </a>
           ))}
         </div>
-        {project.note && <p className="project-note">{project.note}</p>}
       </div>
     </article>
   );
