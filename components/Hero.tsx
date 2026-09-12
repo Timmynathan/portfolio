@@ -56,6 +56,9 @@ export function Hero() {
                   <MailIcon />
                 </a>
               </div>
+              <a href="/about" className="hero-more-link">
+                More about me <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
           <div className="hero-photo">

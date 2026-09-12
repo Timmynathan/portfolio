@@ -10,6 +10,8 @@ export interface Project {
   linkLabel: string;
   href?: string;
   videoUrl?: string;
+  /** Label for the videoUrl button, since linkLabel is used by href. Default "Watch Demo". */
+  videoLabel?: string;
   repos?: { label: string; href: string }[];
   note?: string;
   image?: string;
