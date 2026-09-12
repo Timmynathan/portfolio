@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PROJECTS } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectDetailModal } from "@/components/ProjectDetailModal";
+import { StarIcon } from "@/components/icons";
 import type { Project } from "@/types";
 
 export function Projects() {
@@ -13,7 +14,10 @@ export function Projects() {
     <section id="projects" className="projects">
       <div className="container">
         <div className="fade-in">
-          <h2 className="section-title">Featured Projects</h2>
+          <div className="section-heading">
+            <span className="section-tag" aria-hidden="true"><StarIcon /></span>
+            <h2 className="section-title">Featured Projects</h2>
+          </div>
 
           <div className="projects-grid">
             {PROJECTS.map((project) => (

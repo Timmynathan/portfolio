@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
 import { ABOUT_PHOTOS } from "@/data/about-photos";
-import { ArrowLeftIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import { ArrowLeftIcon, CameraIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "About | Ilesanmi Oluwatimilehin",
@@ -100,7 +100,10 @@ export default function AboutPage() {
         {ABOUT_PHOTOS.length > 0 && (
           <section className="about-gallery-section">
             <div className="container fade-in">
-              <h2 className="section-title">A Few Snapshots</h2>
+              <div className="section-heading">
+                <span className="section-tag" aria-hidden="true"><CameraIcon /></span>
+                <h2 className="section-title">A Few Snapshots</h2>
+              </div>
               <div className="about-gallery">
                 {ABOUT_PHOTOS.map((photo) => (
                   <div key={photo.src} className="about-gallery-item">
