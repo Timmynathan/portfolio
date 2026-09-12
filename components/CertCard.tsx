@@ -10,6 +10,7 @@ export function CertCard({ cert }: { cert: Certification }) {
       </div>
       <div className="cert-meta">
         {cert.issuer} · {cert.date}
+        {cert.expires && ` – ${cert.expires}`}
       </div>
       <p className="cert-description">{cert.description}</p>
       <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" className="project-link cert-link">
