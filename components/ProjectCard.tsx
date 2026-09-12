@@ -51,7 +51,7 @@ export function ProjectCard({
           {project.videoUrl && (
             <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="project-link">
               <PlayIcon />
-              {project.linkLabel}
+              {project.videoLabel ?? "Watch Demo"}
             </a>
           )}
           {project.href && (

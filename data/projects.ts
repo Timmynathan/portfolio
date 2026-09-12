@@ -44,6 +44,7 @@ export const PROJECTS: Project[] = [
     image: "/images/projects/proposally.png",
     linkLabel: "Website",
     href: "https://proposally.vercel.app/",
+    videoUrl: "https://www.loom.com/share/b8dda4751769442d8eea7dd92fca2d13",
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/Proposally" }],
   },
   {
