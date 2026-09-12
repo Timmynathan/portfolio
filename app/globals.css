@@ -865,7 +865,7 @@ main section, section { padding: 6rem 0; }
 }
 
 .about-gallery-item {
-    height: 220px;
+    height: 260px;
     width: auto;
     max-width: 100%;
     border-radius: 16px;
@@ -875,7 +875,7 @@ main section, section { padding: 6rem 0; }
 }
 
 @media (max-width: 640px) {
-    .about-gallery-item { height: 160px; }
+    .about-gallery-item { height: 180px; }
 }
 
 /* --------------------------------------------------------------------------
