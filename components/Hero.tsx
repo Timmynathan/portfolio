@@ -7,11 +7,8 @@ export function Hero() {
       <div className="container">
         <div className="hero-content fade-in">
           <div className="hero-text">
-            <p className="hero-greeting">
-              Hi There! <span className="hero-wave">👋</span>
-            </p>
             <h1 className="hero-name">
-              I&apos;m <span className="hero-name-accent">Nathaniel Ilesanmi</span>
+              Hey! I&apos;m <span className="hero-name-accent">Nathaniel Ilesanmi</span>
             </h1>
             <p className="hero-role">Software Engineer</p>
             <p className="hero-description">
