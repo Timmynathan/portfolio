@@ -10,7 +10,7 @@ export function Hero() {
             <h1 className="hero-name">
               Hey! I&apos;m <span className="hero-name-accent">Nathaniel Ilesanmi</span>
             </h1>
-            <p className="hero-role">Software Engineer</p>
+            <p className="hero-role">Software/AI Engineer</p>
             <p className="hero-description">
               <span className="hero-description-line">
                 I build software that solves people&apos;s pain points end-to-end.
