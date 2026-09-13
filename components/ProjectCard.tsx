@@ -29,7 +29,11 @@ export function ProjectCard({
               alt={`${project.title} preview`}
               fill
               sizes="(max-width: 640px) 45vw, 350px"
-              style={{ objectFit: project.imageFit ?? "cover" }}
+              style={{
+                objectFit: project.imageFit ?? "cover",
+                objectPosition: project.imagePosition ?? "center",
+                transform: project.imageScale ? `scale(${project.imageScale})` : undefined,
+              }}
             />
           </div>
         </div>
@@ -41,7 +45,9 @@ export function ProjectCard({
           </div>
         )}
         <h3 className="project-title">{project.title}</h3>
-        <p className="project-description">{project.shortDescription ?? project.description}</p>
+        <p className="project-description">
+          {project.shortDescription ?? (Array.isArray(project.description) ? project.description[0]?.body : project.description)}
+        </p>
         <div className="tech-stack">
           {project.techStack.map((t) => (
             <TechTag key={t} label={t} />

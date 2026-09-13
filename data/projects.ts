@@ -42,10 +42,44 @@ export const PROJECTS: Project[] = [
     techStack: ["React", "TypeScript", "Vercel", "Supabase", "Claude", "Resend"],
     mainStack: "TypeScript",
     image: "/images/projects/proposally.png",
+    imagePosition: "center 80%",
     linkLabel: "Website",
     href: "https://proposally.vercel.app/",
     videoUrl: "https://www.loom.com/share/b8dda4751769442d8eea7dd92fca2d13",
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/Proposally" }],
+  },
+  {
+    id: "Opsr",
+    title: "Opsr",
+    shortDescription:
+      "A dashboard that pulls sales, project & hiring data from three separate systems daily and uses AI to explain what changed, replacing manual report creation.",
+    meta: "2026 · Automation, AI Agents",
+    description: [
+      {
+        heading: "The problem",
+        body: "Koya Talent's leadership had no single view of the business. Sales lived in a Google Sheet, project delivery in Airtable, and hiring behind an internal API. Answering a basic question about company performance meant a person opening three tabs and copying numbers into a fourth document — slow, and calculated slightly differently each time depending on who did it.",
+      },
+      {
+        heading: "The build",
+        body: "A daily n8n workflow fetches all three sources, normalises them into one shape, and computes a fixed set of KPIs across three periods — last 30 days, last 90 days, and year to date — along with the equal-length period immediately before each, so every figure has a comparison. Those finished numbers go to Claude, which writes an executive summary, names risks with severity, and suggests actions. The whole run is stored as an immutable snapshot in Supabase alongside the raw source records it was built from, and a React dashboard renders the latest snapshot per period. Users can also request an arbitrary date range on demand, which triggers a fresh run through a Vercel serverless function.",
+      },
+      {
+        heading: "Design principles",
+        body: "Three rules ran through every decision. Claude never touches arithmetic — every number is computed deterministically in code, and the model only writes prose from finished figures. The dashboard never calculates either; it reads snapshots and renders them, because two places doing the same sum eventually disagree. And missing data is never rendered as zero: a source that fails produces a prominent banner rather than a section full of zeros, since a report claiming \"zero overdue projects\" when it means \"couldn't reach Airtable\" reads as good news.",
+      },
+      {
+        heading: "The hardest part",
+        body: "Making the AI output trustworthy. Early versions dramatised — calling two overdue projects a \"collapse\", and at one point inventing a prior-period comparison that was demonstrably false. Three rounds of stricter prompt instructions didn't hold. What worked was changing the input rather than the behaviour: any rate computed from fewer than five records now has its percentage suppressed in code, so the model receives \"0 of 2\" and never sees the alarming-looking 0% at all. Constraining what a model can see turned out to be far more reliable than instructing it how to behave.",
+      },
+    ],
+    techStack: ["React", "TypeScript", "n8n", "Claude", "Supabase", "Vercel"],
+    mainStack: "TypeScript",
+    image: "/images/projects/koyaops.png",
+    imagePosition: "center 80%",
+    imageScale: 1.3,
+    // Internal company tool — no public link or repo to share.
+    linkLabel: "Website",
+    note: "*Internal tool — not publicly available*",
   },
   {
     id: "MoveIn Rental App",

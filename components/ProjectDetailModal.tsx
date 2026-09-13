@@ -30,14 +30,26 @@ export function ProjectDetailModal({
               alt={`${project.title} preview`}
               fill
               sizes="(max-width: 640px) 100vw, 640px"
-              style={{ objectFit: project.imageFit ?? "cover", objectPosition: "top" }}
+              style={{
+                objectFit: project.imageFit ?? "cover",
+                objectPosition: project.imagePosition ?? "top",
+              }}
             />
           </div>
         )}
 
         <div className="project-detail-body">
           <h3 className="project-detail-title">{project.title}</h3>
-          <p className="project-detail-description">{project.description}</p>
+          {Array.isArray(project.description) ? (
+            project.description.map((section) => (
+              <div key={section.heading} className="project-detail-section">
+                <h4 className="project-detail-subheading">{section.heading}</h4>
+                <p className="project-detail-description">{section.body}</p>
+              </div>
+            ))
+          ) : (
+            <p className="project-detail-description">{project.description}</p>
+          )}
 
           <div className="tech-stack">
             {project.techStack.map((t) => (
