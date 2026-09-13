@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "Proposally",
-    title: "Proposally",
+    title: "Proposally AI",
     shortDescription: "An AI business proposal generator; upload docs, paste meeting notes, or speak.",
     meta: "2026 · Full-Stack Development, AI Agents",
     description:
