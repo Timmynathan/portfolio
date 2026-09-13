@@ -112,7 +112,11 @@ export default function AboutPage() {
                       alt={photo.alt}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 900px) 33vw, 25vw"
-                      style={{ objectFit: "cover", objectPosition: photo.position ?? "center" }}
+                      style={{
+                        objectFit: "cover",
+                        objectPosition: photo.position ?? "center",
+                        transform: photo.scale ? `scale(${photo.scale})` : undefined,
+                      }}
                     />
                   </div>
                 ))}
