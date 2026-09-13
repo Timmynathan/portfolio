@@ -1151,6 +1151,23 @@ footer a:hover { color: rgba(255,255,255,0.9); }
     margin-bottom: 1.25rem;
 }
 
+.project-detail-section {
+    margin-bottom: 1.1rem;
+}
+
+.project-detail-section .project-detail-description {
+    margin-bottom: 0;
+}
+
+.project-detail-subheading {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.4rem;
+}
+
 .project-detail-close {
     position: absolute;
     top: 12px;
