@@ -48,7 +48,11 @@ export function ProjectDetailModal({
               </div>
             ))
           ) : (
-            <p className="project-detail-description">{project.description}</p>
+            project.description.split("\n\n").map((paragraph, i) => (
+              <p key={i} className="project-detail-description">
+                {paragraph}
+              </p>
+            ))
           )}
 
           <div className="tech-stack">

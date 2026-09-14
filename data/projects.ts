@@ -24,15 +24,11 @@ export const PROJECTS: Project[] = [
     description: [
       {
         heading: "The problem",
-        body: "Remote job listings open to Nigeria-based candidates are scattered across job boards with inconsistent, sometimes-misleading APIs — there was no single place to see genuinely eligible roles scored against an actual CV.",
+        body: "Remote job listings open to Nigeria-based candidates are scattered across job boards with inconsistent, sometimes misleading APIs. There was no single place to see genuinely eligible EMEA roles.",
       },
       {
         heading: "The build",
         body: "An agentic pipeline built with LangGraph pulls from six free job-board APIs in parallel, applies deterministic hard filters for role fit, seniority, and geographic eligibility, then has an LLM read each surviving posting against the candidate's CV to produce a 0–100 match score with reasoning. It runs unattended on a daily schedule and emails a digest of new strong matches, or on demand from a Streamlit dashboard with live per-node progress.",
-      },
-      {
-        heading: "Shared state, not two copies",
-        body: "Rather than the local agent and a hosted dashboard each holding their own data, both read and write the same Postgres database — including the CV and preferences themselves, stored as bytes/JSONB rather than local files — so editing preferences from either place reaches both.",
       },
       {
         heading: "Docs said filterable; the API disagreed",
@@ -49,14 +45,6 @@ export const PROJECTS: Project[] = [
       {
         heading: "Streaming an agent's progress into a UI",
         body: "Swapping a blocking invoke() call for stream(stream_mode=\"updates\") surfaced real per-node progress in the dashboard without duplicating the agent's own orchestration logic.",
-      },
-      {
-        heading: "An obscure macOS packaging bug",
-        body: "An intermittent ModuleNotFoundError traced back to uv's editable-install mechanism silently applying macOS's hidden-file flag to its .pth file, which Python's own site.py then skips — resolved at the build-backend level rather than worked around.",
-      },
-      {
-        heading: "Testing a real dependency honestly",
-        body: "Rather than mock the database layer entirely, database tests run against a real, disposable Postgres instance — truncated clean before every test — and skip gracefully when that instance isn't configured, instead of lying with a mock or hard-failing in environments without it.",
       },
     ],
     techStack: ["Python", "LangGraph", "Gemini", "Postgres", "Streamlit", "Resend"],
@@ -83,7 +71,10 @@ export const PROJECTS: Project[] = [
     imageFit: "contain",
     linkLabel: "Website",
     href: "https://nonyespasta.com/",
-    repos: [{ label: "Source", href: "https://github.com/Timmynathan/nonyes-pasta-backend" }],
+    repos: [
+      { label: "Backend", href: "https://github.com/Timmynathan/nonyes-pasta-backend" },
+      { label: "Frontend", href: "https://github.com/Timmynathan/nonyes-pasta-frontend" },
+    ],
   },
   {
     id: "Proposally",
@@ -91,7 +82,7 @@ export const PROJECTS: Project[] = [
     shortDescription: "An AI business proposal generator; upload docs, paste meeting notes, or speak.",
     meta: "2026 · Full-Stack Development, AI Agents",
     description:
-      "An internal tool that turns discovery-call notes into a drafted proposal, then keeps a human in control the whole way: intake, AI drafting, per-section regeneration, a separate reviewer's approval, and client delivery, with every step logged. Claude writes prose, never commitments — price, scope, and timeline are copied verbatim from the intake form, and the app programmatically verifies they appear unmodified in the model's output rather than trusting the prompt. A missing required field renders as an explicit marker, and a Postgres trigger physically blocks sending until it's filled in, so the approval gate lives in the database rather than behind a hidden button. Sonnet 5 drafts the initial proposal; Haiku 4.5 handles fast per-section regeneration. Internal reviewer and decision emails are best-effort and never block a real approval — the deliberate opposite of the client-delivery email, where the send itself is the point.",
+      "An internal tool that turns discovery call notes, voice notes, and/or any uploaded docs into a business proposal, then keeps a human in control the whole way: intake, AI drafting, per-section regeneration, a separate reviewer's approval, and client delivery, with every step logged. Claude writes prose, but never commitments such as price, scope, and timeline. They are copied verbatim from the intake form, and the app programmatically verifies they appear unmodified in the model's output rather than trusting the prompt.\n\nSonnet 5 drafts the initial proposal; Haiku 4.5 handles fast per-section regeneration.",
     techStack: ["React", "TypeScript", "Vercel", "Supabase", "Claude", "Resend"],
     mainStack: "TypeScript",
     image: "/images/projects/proposally.png",
