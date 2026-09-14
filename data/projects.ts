@@ -16,6 +16,59 @@ export const PROJECTS: Project[] = [
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/tb-detection-app" }],
   },
   {
+    id: "My Job Hunter",
+    title: "My Job Hunter AI Agent",
+    shortDescription:
+      "A personal AI agent that hunts for Nigeria-friendly remote roles over 6 separate job boards, filtering for genuine eligibility, and scoring each posting against a CV with an LLM.",
+    meta: "2026 · AI Agents, Automation",
+    description: [
+      {
+        heading: "The problem",
+        body: "Remote job listings open to Nigeria-based candidates are scattered across job boards with inconsistent, sometimes-misleading APIs — there was no single place to see genuinely eligible roles scored against an actual CV.",
+      },
+      {
+        heading: "The build",
+        body: "An agentic pipeline built with LangGraph pulls from six free job-board APIs in parallel, applies deterministic hard filters for role fit, seniority, and geographic eligibility, then has an LLM read each surviving posting against the candidate's CV to produce a 0–100 match score with reasoning. It runs unattended on a daily schedule and emails a digest of new strong matches, or on demand from a Streamlit dashboard with live per-node progress.",
+      },
+      {
+        heading: "Shared state, not two copies",
+        body: "Rather than the local agent and a hosted dashboard each holding their own data, both read and write the same Postgres database — including the CV and preferences themselves, stored as bytes/JSONB rather than local files — so editing preferences from either place reaches both.",
+      },
+      {
+        heading: "Docs said filterable; the API disagreed",
+        body: "Several \"free\" job-board search/filter parameters turned out to silently no-op server-side — identical results for unrelated search terms — so retrieval was redesigned around fetching full feeds and doing all filtering deterministically client-side instead of trusting the API's documented behaviour.",
+      },
+      {
+        heading: "One dead source shouldn't kill the run",
+        body: "Each of the six job-board sources is fetched, logged, and isolated independently, so one API timing out or failing doesn't take the rest of the run down with it.",
+      },
+      {
+        heading: "Scoring under a tight rate limit",
+        body: "Free-tier LLM quotas are tight relative to real usage volume, so scoring runs against a per-run budget that prioritises the freshest postings rather than scoring everything and running out partway through.",
+      },
+      {
+        heading: "Streaming an agent's progress into a UI",
+        body: "Swapping a blocking invoke() call for stream(stream_mode=\"updates\") surfaced real per-node progress in the dashboard without duplicating the agent's own orchestration logic.",
+      },
+      {
+        heading: "An obscure macOS packaging bug",
+        body: "An intermittent ModuleNotFoundError traced back to uv's editable-install mechanism silently applying macOS's hidden-file flag to its .pth file, which Python's own site.py then skips — resolved at the build-backend level rather than worked around.",
+      },
+      {
+        heading: "Testing a real dependency honestly",
+        body: "Rather than mock the database layer entirely, database tests run against a real, disposable Postgres instance — truncated clean before every test — and skip gracefully when that instance isn't configured, instead of lying with a mock or hard-failing in environments without it.",
+      },
+    ],
+    techStack: ["Python", "LangGraph", "Gemini", "Postgres", "Streamlit", "Resend"],
+    mainStack: "Python",
+    image: "/images/projects/jobhunter.png",
+    // Content runs edge-to-edge (sidebar on the left, buttons on the right) — cropping cuts into it, so show the whole screenshot.
+    imageFit: "contain",
+    // Personal, locally-run project — no live demo to link to.
+    linkLabel: "Website",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/remote-job-rag" }],
+  },
+  {
     id: "Nonye's Pasta",
     title: "Nonye's Pasta",
     // Draft — no short text was supplied for this one; tweak freely.
@@ -77,9 +130,9 @@ export const PROJECTS: Project[] = [
     image: "/images/projects/koyaops.png",
     imagePosition: "center 80%",
     imageScale: 1.3,
-    // Internal company tool — no public link or repo to share.
+    // Internal company tool — no live demo to link to.
     linkLabel: "Website",
-    note: "*Internal tool — not publicly available*",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/Koya-Talent---Operations-Report-System" }],
   },
   {
     id: "MoveIn Rental App",
