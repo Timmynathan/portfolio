@@ -77,6 +77,45 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "AI Content Publisher",
+    title: "AI Content Publisher",
+    shortDescription:
+      "An AI content pipeline that turns a raw idea into reviewed, channel-ready articles and social posts (X, LinkedIn, e.t.c) fully autonomous from research through evaluation.",
+    meta: "2026 · AI Agents, Automation",
+    description: [
+      {
+        heading: "The problem",
+        body: "A marketing team's content workflow — researching a topic, drafting an SEO article, adapting it for LinkedIn/X/newsletter, reviewing it, and publishing — worked, but was too manual to scale without sacrificing quality, tone, or factual accuracy.",
+      },
+      {
+        heading: "The solution",
+        body: "An end-to-end content agent that runs unattended from request to review. A manager submits an idea, an audience, and (optionally) source material; the system then researches the topic, retrieves and grounds itself in real source material, plans multiple article angles, drafts them in parallel, scores each against a fixed quality rubric, and automatically rewrites whatever falls short — looping until it passes or hits a revision cap — with zero manual clicks along the way. It stops in exactly two situations: when it genuinely can't produce something trustworthy (too few usable sources, a failed generation step), or when a human is required, which is the one deliberate gate in the whole system — nothing gets adapted for channels, queued, or published without a reviewer's sign-off.",
+      },
+      {
+        heading: "Grounding, not just generation",
+        body: "Every factual claim in a draft is checked against the actual source text it was drafted from; unverifiable claims are flagged rather than silently trusted, and reviewers see exactly which sources informed the output.",
+      },
+      {
+        heading: "Self-correcting drafts",
+        body: "An evaluation/revision loop scores drafts against a rubric and automatically rewrites only the failing sections, not the whole article, up to a bounded number of attempts.",
+      },
+      {
+        heading: "A recovery path, not a checkpoint",
+        body: "Source selection isn't a gate the pipeline waits at; a manager can always discard the run and redo it with different sources via \"Change sources and redraft,\" and can optionally opt a specific request into pausing for review before drafting starts.",
+      },
+      {
+        heading: "Channel-aware adaptation",
+        body: "The approved article is reformatted per-platform (LinkedIn, X, email newsletter) against explicit formatting rules, validated in code (not just trusted to the model), and lands in a publishing queue.",
+      },
+    ],
+    techStack: ["React", "TypeScript", "Vercel", "Supabase", "Claude", "Firecrawl", "Resend"],
+    mainStack: "TypeScript",
+    image: "/images/projects/content-agent.png",
+    // No live demo to link to yet.
+    linkLabel: "Website",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/Content-Research-and-Publishing-Agent" }],
+  },
+  {
     id: "Proposally",
     title: "Proposally AI",
     shortDescription: "An AI business proposal generator; upload docs, paste meeting notes, or speak.",
