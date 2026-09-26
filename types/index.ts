@@ -29,6 +29,8 @@ export interface Project {
   /** CSS transform: scale() multiplier, to zoom in on the image. Default 1. Card thumbnail only —
    *  the detail modal shows the image at full scale so nothing gets cropped away on the larger view. */
   imageScale?: number;
+  /** Separate image for the detail modal, shown whole at its natural aspect ratio instead of cropped into the frame. */
+  detailImage?: { src: string; width: number; height: number };
   featured?: boolean;
   secondary?: boolean;
 }
