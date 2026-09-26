@@ -77,6 +77,26 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "Scraping Bird",
+    title: "Scraping Bird AI",
+    shortDescription:
+      "An AI lead research/outreach agent that turns a plain-English targeting brief (\"find 10 US SaaS companies with 10-100 employees\") into a list of qualified leads with ready-to-review cold outreach.",
+    meta: "2026 · AI Agents, Automation",
+    description:
+      "Scraping Bird is an AI lead research and outreach agent built with the Claude Agent SDK. Given a plain-English objective, it refines a target customer profile, discovers real companies via Apify, reads their public websites with Firecrawl, judges fit against the criteria with evidence-backed reasoning, and drafts a 3-step cold email sequence plus a LinkedIn message, all logged to Supabase for human review. It never finds, validates, or sends anything itself, every output is a draft waiting for a person to approve.",
+    techStack: ["TypeScript", "Next.js", "Claude Agent SDK", "Supabase", "Apify", "Firecrawl", "Tailwind CSS"],
+    mainStack: "TypeScript",
+    image: "/images/projects/scrapingbird.png",
+    // Wider than the card's 16:9 frame — anchor left so the logo and headline stay in view.
+    imagePosition: "left",
+    // Expanded view shows the whole screenshot, uncropped.
+    detailImage: { src: "/images/projects/scrapingbird.png", width: 1893, height: 864 },
+    linkLabel: "Website",
+    href: "https://lead-agent-zeta-two.vercel.app/",
+    videoUrl: "https://drive.google.com/file/d/1H8RZ1jR1NRiWDzdslv_9OWT9NhvBre7c/view?usp=sharing",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/lead-agent" }],
+  },
+  {
     id: "AI Content Publisher",
     title: "AI Content Publisher",
     shortDescription:

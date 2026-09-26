@@ -23,7 +23,18 @@ export function ProjectDetailModal({
           <CloseIcon />
         </button>
 
-        {project.image && (
+        {project.detailImage ? (
+          <div className="project-detail-image" style={{ aspectRatio: "auto" }}>
+            <Image
+              src={project.detailImage.src}
+              alt={`${project.title} preview`}
+              width={project.detailImage.width}
+              height={project.detailImage.height}
+              sizes="(max-width: 640px) 100vw, 640px"
+              style={{ display: "block", width: "100%", height: "auto" }}
+            />
+          </div>
+        ) : project.image && (
           <div className="project-detail-image">
             <Image
               src={project.image}
