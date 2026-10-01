@@ -117,10 +117,9 @@ export const PROJECTS: Project[] = [
     image: "/images/projects/relaypay.png",
     // Expanded view shows the whole screenshot, uncropped.
     detailImage: { src: "/images/projects/relaypay.png", width: 1918, height: 871 },
-    // Runs locally through a secure tunnel — no public demo to link to yet.
     linkLabel: "Website",
+    href: "https://support-agent-production-775f.up.railway.app/",
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/support-agent" }],
-    note: "*Fully working end to end, running locally. Next: cloud deployment on Google Cloud Run, automated evaluations, and failure drills.*",
   },
   {
     id: "Scraping Bird",
