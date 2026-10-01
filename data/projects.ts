@@ -1,4 +1,4 @@
-import type { Project } from "@/types";
+import type { Project, ProjectCategory } from "@/types";
 
 export const PROJECTS: Project[] = [
   {
@@ -19,7 +19,7 @@ export const PROJECTS: Project[] = [
     id: "My Job Hunter",
     title: "My Job Hunter AI Agent",
     shortDescription:
-      "A personal AI agent that hunts for Nigeria-friendly remote roles over 6 separate job boards, filtering for genuine eligibility, and scoring each posting against a CV with an LLM.",
+      "A personal AI agent that hunts for Nigeria-friendly remote roles over 6 separate job boards, filtering for genuine eligibility, and scoring each posting against my CV with an LLM.",
     meta: "2026 · AI Agents, Automation",
     description: [
       {
@@ -77,10 +77,56 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "RelayPay",
+    title: "RelayPay Voice Support Agent",
+    shortDescription:
+      "An AI voice agent that answers customer support calls for a payments company",
+    meta: "2026 · AI Agents, Voice AI",
+    description: [
+      {
+        heading: "Overview",
+        body: "RelayPay is a fictional B2B payments platform for cross-border payments, invoicing and contractor payouts, and this is its voice support line. A customer opens a web page and talks to Relay, an animated 3D assistant, which answers from an approved knowledge base, checks transactions and payouts, opens support tickets, and escalates to a human specialist when needed. The focus was making the agent trustworthy, not just conversational: every answer must come from approved information or a real record, the important rules are enforced in code rather than left to the AI's judgement, and every decision is logged so it can be audited.",
+      },
+      {
+        heading: "What it does",
+        body: "Relay answers questions by voice or text about fees, payout times, invoicing and verification, and looks up live transactions, payouts and accounts through a secure tool layer — but only after the caller matches on two identifying details. It creates tickets and escalations with short references (e.g. TKT-00013) the caller can copy with one click, and escalates automatically for account restrictions, compliance issues, disputes, refunds or a frustrated caller. Callers type their email rather than saying it, since speech-to-text garbles emails. It runs the call like a person would: one question at a time, checking whether there's anything else, refusing to hang up until an escalation has contact details, and ending the call itself when the caller is done.",
+      },
+      {
+        heading: "How it works",
+        body: "Vapi handles audio only (Deepgram speech-to-text, LiveKit turn detection, text-to-speech). A Node.js/TypeScript agent server verifies each request genuinely came from Vapi, retrieves knowledge with a custom BM25 keyword search behind a minimum relevance threshold, runs the Claude turn through the Claude Agent SDK with structured output, and enforces the rules. The agent can only reach customer data through an MCP tool server, which verifies callers, hides sensitive fields, and logs every call to Supabase before it runs.",
+      },
+      {
+        heading: "Rules enforced in code, not just requested in the prompt",
+        body: "An answer that cites no retrieved source and no tool result is replaced with a safe \"I can't confirm that\" reply. Escalation triggers are detected in code, and an escalation is forced if the AI doesn't take that path. Emails are never read aloud, and references like TXN-9001 are always spoken digit by digit, even when the model spells them oddly. The AI can't end a call by accident: only a fixed goodbye line written by the code triggers the hang-up.",
+      },
+      {
+        heading: "A database that protects itself",
+        body: "Row-level security on every table with no public access to personal data, and append-only audit tables that can't be edited or deleted. Unique constraints allow one open escalation per conversation, so a retry fills in missing details instead of creating a duplicate, and a conversation can't switch to a different verified customer once one is confirmed. Every secret stays on the server, Vapi requests are HMAC signature-checked within a timestamp window before anything runs, and the agent can see only its five approved tools.",
+      },
+      {
+        heading: "Speed and results",
+        body: "Replies stream to the caller sentence by sentence, the session warms up as soon as the call connects, and if an answer takes longer than 1.2 s the caller hears \"One moment\" so the line never goes silent — about 1.2 s to Relay's first words in the voice simulator. Discovering the agent was loading about 110 unrelated tools and restricting it to its own five cut median turn time from 11.4 s to 7.0 s and AI cost per test run by 74%. It's covered by 61 automated voice checks, 12 database guard tests that deliberately attempt forbidden actions (like editing an audit log) and confirm the database refuses them, 9 end-to-end scenarios, and browser tests that run the real widget against a simulated voice service.",
+      },
+      {
+        heading: "Challenges solved",
+        body: "Misheard reference numbers: \"TXN 9, double o, 1\" is now understood as TXN-9001, and garbled input is never guessed — the agent asks again. A spurious \"I'm having trouble\" message on every turn turned out, from the call records, to be a voice-platform timeout firing before the server replied. Silently dropped calls now tell the caller the call ended before Relay could answer, while a normal goodbye is no longer shown as an error. And the chat covering the assistant's face was fixed by rebuilding the layout so the face shrinks to fit instead of being hidden.",
+      },
+    ],
+    techStack: ["TypeScript", "Node.js", "Claude Agent SDK", "MCP", "Vapi", "Supabase", "Three.js", "Zod"],
+    mainStack: "TypeScript",
+    image: "/images/projects/relaypay.png",
+    // Expanded view shows the whole screenshot, uncropped.
+    detailImage: { src: "/images/projects/relaypay.png", width: 1918, height: 871 },
+    // Runs locally through a secure tunnel — no public demo to link to yet.
+    linkLabel: "Website",
+    repos: [{ label: "Source", href: "https://github.com/Timmynathan/support-agent" }],
+    note: "*Fully working end to end, running locally. Next: cloud deployment on Google Cloud Run, automated evaluations, and failure drills.*",
+  },
+  {
     id: "Scraping Bird",
     title: "Scraping Bird AI",
     shortDescription:
-      "An AI lead research/outreach agent that turns a plain-English targeting brief (\"find 10 US SaaS companies with 10-100 employees\") into a list of qualified leads with ready-to-review cold outreach.",
+      "Describe your ideal customer in plain English and get back qualified leads with cold emails ready to send.",
     meta: "2026 · AI Agents, Automation",
     description:
       "Scraping Bird is an AI lead research and outreach agent built with the Claude Agent SDK. Given a plain-English objective, it refines a target customer profile, discovers real companies via Apify, reads their public websites with Firecrawl, judges fit against the criteria with evidence-backed reasoning, and drafts a 3-step cold email sequence plus a LinkedIn message, all logged to Supabase for human review. It never finds, validates, or sends anything itself, every output is a draft waiting for a person to approve.",
@@ -100,7 +146,7 @@ export const PROJECTS: Project[] = [
     id: "AI Content Publisher",
     title: "AI Content Publisher",
     shortDescription:
-      "An AI content pipeline that turns a raw idea into reviewed, channel-ready articles and social posts (X, LinkedIn, e.t.c) fully autonomous from research through evaluation.",
+      "An AI content publisher that turns a raw idea into reviewed, platform-ready content (X, LinkedIn, e.t.c)",
     meta: "2026 · AI Agents, Automation",
     description: [
       {
@@ -153,7 +199,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "Opsr",
-    title: "Opsr",
+    title: "Opsr AI",
     shortDescription:
       "A dashboard that pulls sales, project & hiring data from three separate systems daily and uses AI to explain what changed, replacing manual report creation.",
     meta: "2026 · Automation, AI Agents",
@@ -227,5 +273,24 @@ export const PROJECTS: Project[] = [
     linkLabel: "Website",
     href: "https://247hr.co.uk/",
     note: "*Production platform — code not publicly available*",
+  },
+];
+
+/** Display grouping for the Projects section. Order here is the order on the page. */
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
+  {
+    title: "AI Agents & Automation",
+    subtitle: "LLM-powered systems that take over repetitive operational work",
+    projectIds: ["My Job Hunter", "RelayPay", "Scraping Bird", "AI Content Publisher", "Proposally", "Opsr"],
+  },
+  {
+    title: "Full-Stack Products",
+    subtitle: "End-to-end web applications, most built solo and shipped to real users",
+    projectIds: ["Nonye's Pasta", "MoveIn Rental App", "City Care", "247HR"],
+  },
+  {
+    title: "Machine Learning",
+    subtitle: "Applied deep learning",
+    projectIds: ["TB DETECT"],
   },
 ];

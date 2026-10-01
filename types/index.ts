@@ -35,6 +35,19 @@ export interface Project {
   secondary?: boolean;
 }
 
+export interface ProjectCategory {
+  title: string;
+  subtitle: string;
+  /** Project ids, in display order. */
+  projectIds: string[];
+}
+
+export interface ToolGroup {
+  title: string;
+  /** Most central first. */
+  tools: string[];
+}
+
 export interface Certification {
   title: string;
   issuer: string;
