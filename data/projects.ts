@@ -178,6 +178,7 @@ export const PROJECTS: Project[] = [
     image: "/images/projects/content-agent.png",
     // No live demo to link to yet.
     linkLabel: "Website",
+    videoUrl: "https://drive.google.com/file/d/1Z1nKrHPPdKo-La03ZqN7a-HON5Vuv_TG/view?usp=sharing",
     repos: [{ label: "Source", href: "https://github.com/Timmynathan/Content-Research-and-Publishing-Agent" }],
   },
   {
