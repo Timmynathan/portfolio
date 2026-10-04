@@ -51,6 +51,7 @@ export function ProjectDetailModal({
 
         <div className="project-detail-body">
           <h3 className="project-detail-title">{project.title}</h3>
+          {project.date && <p className="project-date">{project.date}</p>}
           {Array.isArray(project.description) ? (
             project.description.map((section) => (
               <div key={section.heading} className="project-detail-section">

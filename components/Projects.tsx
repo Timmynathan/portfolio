@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PROJECTS, PROJECT_CATEGORIES } from "@/data/projects";
+import { FEATURED_PROJECT_ID, PROJECTS, PROJECT_CATEGORIES } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectDetailModal } from "@/components/ProjectDetailModal";
 import { StarIcon } from "@/components/icons";
@@ -11,7 +11,7 @@ const PROJECTS_BY_ID = new Map(PROJECTS.map((p) => [p.id, p]));
 
 function getProject(id: string): Project {
   const project = PROJECTS_BY_ID.get(id);
-  if (!project) throw new Error(`PROJECT_CATEGORIES references unknown project id "${id}"`);
+  if (!project) throw new Error(`Unknown project id "${id}" in data/projects.ts`);
   return project;
 }
 
@@ -34,6 +34,8 @@ export function Projects() {
             <span className="section-tag" aria-hidden="true"><StarIcon /></span>
             <h2 className="section-title">Featured Projects</h2>
           </div>
+
+          <ProjectCard project={getProject(FEATURED_PROJECT_ID)} onOpenDetails={setSelectedProject} />
 
           <div className="project-filters">
             <span className="project-filters-label" id="project-filters-label">Filter by category</span>

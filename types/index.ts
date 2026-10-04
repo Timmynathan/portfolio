@@ -10,6 +10,8 @@ export interface Project {
   description: string | ProjectDescriptionSection[];
   shortDescription?: string;
   meta?: string;
+  /** When it was built, e.g. "Aug 2026" or "Jul 2026 – Present". */
+  date?: string;
   badge?: string;
   techStack: string[];
   mainStack?: string;

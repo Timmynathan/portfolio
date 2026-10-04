@@ -10,7 +10,7 @@ export function Hero() {
             <h1 className="hero-name">
               Hey! I&apos;m <span className="hero-name-accent">Nathaniel Ilesanmi</span>
             </h1>
-            <p className="hero-role">Software/AI Engineer</p>
+            <p className="hero-role">AI Engineer</p>
             <p className="hero-description">
               <span className="hero-description-line">
                 I build software that solves people&apos;s pain points end-to-end.
@@ -18,6 +18,7 @@ export function Hero() {
               <br />
               Currently building AI agents that take over the repetitive work businesses run on.
             </p>
+            <p className="hero-availability">Lagos, Nigeria (GMT+1) · Open to remote roles</p>
             <div className="hero-actions">
               <a href="/resume.pdf" download className="hero-resume magnetic">
                 <span>Resume</span>

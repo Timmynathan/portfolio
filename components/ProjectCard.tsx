@@ -28,7 +28,7 @@ export function ProjectCard({
               src={project.image}
               alt={`${project.title} preview`}
               fill
-              sizes="(max-width: 640px) 45vw, 350px"
+              sizes={project.featured ? "(max-width: 760px) 100vw, 540px" : "(max-width: 640px) 45vw, 350px"}
               style={{
                 objectFit: project.imageFit ?? "cover",
                 objectPosition: project.imagePosition ?? "center",
@@ -45,6 +45,7 @@ export function ProjectCard({
           </div>
         )}
         <h3 className="project-title">{project.title}</h3>
+        {project.date && <p className="project-date">{project.date}</p>}
         <p className="project-description">
           {project.shortDescription ?? (Array.isArray(project.description) ? project.description[0]?.body : project.description)}
         </p>
