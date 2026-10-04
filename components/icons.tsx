@@ -232,3 +232,76 @@ export function ArrowLeftIcon() {
     </svg>
   );
 }
+
+/** Small stroke icon used in dashboard card titles. */
+function DashIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  );
+}
+
+export function PaletteIcon() {
+  return (
+    <DashIcon>
+      <path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2v-.5c0-.5.2-1 .6-1.4.4-.4.9-.6 1.4-.6H18a4 4 0 0 0 4-4c0-6.1-4.5-11.5-10-11.5z" />
+      <circle cx="7.5" cy="11.5" r="1" />
+      <circle cx="10.5" cy="7.5" r="1" />
+      <circle cx="15.5" cy="7.5" r="1" />
+    </DashIcon>
+  );
+}
+
+export function MessageIcon() {
+  return (
+    <DashIcon>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </DashIcon>
+  );
+}
+
+export function PinIcon() {
+  return (
+    <DashIcon>
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </DashIcon>
+  );
+}
+
+export function PointerIcon() {
+  return (
+    <DashIcon>
+      <path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      <path d="m13 13 6 6" />
+    </DashIcon>
+  );
+}
+
+export function ActivityIcon() {
+  return (
+    <DashIcon>
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </DashIcon>
+  );
+}
+
+export function CodeIcon() {
+  return (
+    <DashIcon>
+      <path d="m16 18 6-6-6-6" />
+      <path d="m8 6-6 6 6 6" />
+    </DashIcon>
+  );
+}

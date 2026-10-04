@@ -4,11 +4,15 @@ export const PROJECTS: Project[] = [
   {
     id: "TB DETECT",
     title: "TB Detect AI",
-    shortDescription: "A deep learning model that detects tuberculosis from chest X-rays",
+    date: "Oct 2025 – Present",
+    // Shown as the headline block above the category tabs, not in the grid.
+    featured: true,
+    shortDescription:
+      "A deep learning model that detects tuberculosis from chest X-rays. Independently validated by a practising radiologist. Detection on the target population improved from 1-in-5 to 4-in-5 cases after retraining on a locally-sourced clinical dataset.",
     meta: "2025 · Machine Learning, Web Development",
     description:
       "An AI-powered tool that assists in the early detection of tuberculosis (TB) from chest X-ray images. It uses deep learning to classify scans as TB-positive or negative, improving diagnostic support and accessibility, while also ensuring model interpretability and real-world applicability by addressing challenges such as dataset variability and clinical integration.",
-    techStack: ["Python", "TensorFlow", "OpenCV", "Matplotlib"],
+    techStack: ["Python", "TensorFlow", "Keras", "DenseNet121", "Grad-CAM", "OpenCV", "Flask", "React"],
     mainStack: "Python",
     image: "/images/projects/tbdetect.png",
     linkLabel: "Website",
@@ -18,6 +22,7 @@ export const PROJECTS: Project[] = [
   {
     id: "My Job Hunter",
     title: "My Job Hunter AI Agent",
+    date: "Sep 2026",
     shortDescription:
       "A personal AI agent that hunts for Nigeria-friendly remote roles over 6 separate job boards, filtering for genuine eligibility, and scoring each posting against my CV with an LLM.",
     meta: "2026 · AI Agents, Automation",
@@ -59,6 +64,7 @@ export const PROJECTS: Project[] = [
   {
     id: "Nonye's Pasta",
     title: "Nonye's Pasta",
+    date: "Jul 2026 – Present",
     // Draft — no short text was supplied for this one; tweak freely.
     shortDescription: "A full-stack e-commerce store with Paystack checkout and an admin dashboard, serving 200+ customers.",
     meta: "2026 · Full-Stack Development, E-Commerce",
@@ -79,6 +85,7 @@ export const PROJECTS: Project[] = [
   {
     id: "RelayPay",
     title: "RelayPay Voice Support Agent",
+    date: "Sep 2026",
     shortDescription:
       "An AI voice agent that answers customer support calls for a payments company",
     meta: "2026 · AI Agents, Voice AI",
@@ -124,6 +131,7 @@ export const PROJECTS: Project[] = [
   {
     id: "Scraping Bird",
     title: "Scraping Bird AI",
+    date: "Aug 2026",
     shortDescription:
       "Describe your ideal customer in plain English and get back qualified leads with cold emails ready to send.",
     meta: "2026 · AI Agents, Automation",
@@ -144,6 +152,7 @@ export const PROJECTS: Project[] = [
   {
     id: "AI Content Publisher",
     title: "AI Content Publisher",
+    date: "Aug 2026",
     shortDescription:
       "An AI content publisher that turns a raw idea into reviewed, platform-ready content (X, LinkedIn, e.t.c)",
     meta: "2026 · AI Agents, Automation",
@@ -184,6 +193,7 @@ export const PROJECTS: Project[] = [
   {
     id: "Proposally",
     title: "Proposally AI",
+    date: "Aug 2026",
     shortDescription: "An AI business proposal generator; upload docs, paste meeting notes, or speak.",
     meta: "2026 · Full-Stack Development, AI Agents",
     description:
@@ -200,6 +210,7 @@ export const PROJECTS: Project[] = [
   {
     id: "Opsr",
     title: "Opsr AI",
+    date: "Jul 2026",
     shortDescription:
       "A dashboard that pulls sales, project & hiring data from three separate systems daily and uses AI to explain what changed, replacing manual report creation.",
     meta: "2026 · Automation, AI Agents",
@@ -233,6 +244,7 @@ export const PROJECTS: Project[] = [
   {
     id: "MoveIn Rental App",
     title: "MoveIn",
+    date: "Jul 2026",
     shortDescription:
       "A full-stack rental platform with voice search; describe what you want and it filters the listings.",
     meta: "2026 · Full-Stack Development",
@@ -248,6 +260,7 @@ export const PROJECTS: Project[] = [
   {
     id: "City Care",
     title: "City Care",
+    date: "Dec 2025 – Present",
     shortDescription:
       "Healthcare management system to keep patients, doctors, labs, and admin on the same page across a whole hospital.",
     meta: "2025 · Full-Stack Development",
@@ -263,7 +276,9 @@ export const PROJECTS: Project[] = [
   {
     id: "247HR",
     title: "247HR",
-    shortDescription: "HR management platform; frontend components, built with a team",
+    date: "2025",
+    shortDescription:
+      "HR management platform. Built frontend components on a team, working in an existing codebase with PR-based code review.",
     meta: "2025 · Frontend Development",
     description:
       "247HR is an all-in-one HR management platform that streamlines and automates the entire employee lifecycle from recruitment to payroll and analytics.",
@@ -276,6 +291,9 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+/** Headline project, shown on its own above the category tabs. */
+export const FEATURED_PROJECT_ID = "TB DETECT";
+
 /** Display grouping for the Projects section. Order here is the order on the page. */
 export const PROJECT_CATEGORIES: ProjectCategory[] = [
   {
@@ -287,10 +305,5 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
     title: "Full-Stack Products",
     subtitle: "End-to-end web applications, most built solo and shipped to real users",
     projectIds: ["Nonye's Pasta", "MoveIn Rental App", "City Care", "247HR"],
-  },
-  {
-    title: "Machine Learning",
-    subtitle: "Applied deep learning",
-    projectIds: ["TB DETECT"],
   },
 ];
