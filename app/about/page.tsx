@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
+import { AboutGallery } from "@/components/AboutGallery";
 import { ABOUT_PHOTOS } from "@/data/about-photos";
 import { ArrowLeftIcon, CameraIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
@@ -104,23 +105,7 @@ export default function AboutPage() {
                 <span className="section-tag" aria-hidden="true"><CameraIcon /></span>
                 <h2 className="section-title">A Few Snapshots</h2>
               </div>
-              <div className="about-gallery">
-                {ABOUT_PHOTOS.map((photo) => (
-                  <div key={photo.src} className="about-gallery-item">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 900px) 33vw, 25vw"
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: photo.position ?? "center",
-                        transform: photo.scale ? `scale(${photo.scale})` : undefined,
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
+              <AboutGallery photos={ABOUT_PHOTOS} />
             </div>
           </section>
         )}
