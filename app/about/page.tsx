@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
 import { AboutGallery } from "@/components/AboutGallery";
-import { ABOUT_PHOTOS } from "@/data/about-photos";
+import { getContent } from "@/lib/content";
 import { ArrowLeftIcon, CameraIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   description: "A bit more about Nathaniel — background, focus, and a few photos.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { site, about_photos: photos } = await getContent();
+
   return (
     <>
       <Navbar />
@@ -30,7 +32,7 @@ export default function AboutPage() {
               <div className="about-photo">
                 <Image
                   src="/images/profile_photo.png"
-                  alt="Ilesanmi Oluwatimilehin Nathaniel"
+                  alt={site.legalName}
                   fill
                   sizes="(max-width: 700px) 200px, 240px"
                   style={{
@@ -44,28 +46,15 @@ export default function AboutPage() {
 
               <div className="about-hero-text">
 
-                <p className="about-bio">
-                  I&apos;m Nathaniel, but most of my friends call me Timmy. I&apos;m a software engineer with
-                  2+ years of experience building production-ready applications. My work spans Machine
-                  learning/computer vision, Agentic AI, as well as full-stack web and mobile development.
-                </p>
-                <p className="about-bio">
-                  I&apos;m currently focused on building AI agents that take over the repetitive work
-                  businesses run on.
-                </p>
-                <p className="about-bio">
-                  I&apos;ve shipped products across healthcare, HR, and e-commerce. I care about building
-                  technology that has a real, tangible impact.
-                </p>
-                <p className="about-bio">
-                  Outside of work, I&apos;m usually on the basketball court, spending time with my dog in
-                  nature, or catching up on what&apos;s happening in fintech. There are a few snapshots
-                  below!
-                </p>
+                {site.aboutBio.map((paragraph, i) => (
+                  <p key={i} className="about-bio">
+                    {paragraph}
+                  </p>
+                ))}
 
                 <div className="hero-socials">
                   <a
-                    href="https://www.linkedin.com/in/oluwatimilehin-ilesanmi/"
+                    href={site.linkedin}
                     className="hero-social"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -75,7 +64,7 @@ export default function AboutPage() {
                     <LinkedinIcon />
                   </a>
                   <a
-                    href="https://github.com/Timmynathan"
+                    href={site.github}
                     className="hero-social"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -85,7 +74,7 @@ export default function AboutPage() {
                     <GithubIcon />
                   </a>
                   <a
-                    href="mailto:oluwatimilehin.nathan@gmail.com"
+                    href={`mailto:${site.email}`}
                     className="hero-social"
                     aria-label="Send email"
                     title="Email"
@@ -98,19 +87,19 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {ABOUT_PHOTOS.length > 0 && (
+        {photos.length > 0 && (
           <section className="about-gallery-section">
             <div className="container fade-in">
               <div className="section-heading">
                 <span className="section-tag" aria-hidden="true"><CameraIcon /></span>
                 <h2 className="section-title">A Few Snapshots</h2>
               </div>
-              <AboutGallery photos={ABOUT_PHOTOS} />
+              <AboutGallery photos={photos} />
             </div>
           </section>
         )}
       </main>
-      <Footer />
+      <Footer site={site} />
       <FadeInObserver />
     </>
   );

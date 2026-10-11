@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { SiteSettings } from "@/types";
 import { GITHUB_USER, getLanguageShares, getRecentCommits } from "@/lib/github";
 import { ThemeCard } from "@/components/ThemeCard";
 import { LocalClock } from "@/components/LocalClock";
@@ -21,7 +22,7 @@ function formatPercent(percent: number) {
   return percent < 1 ? "<1%" : `${Math.round(percent)}%`;
 }
 
-export async function Dashboard() {
+export async function Dashboard({ site }: { site: SiteSettings }) {
   const [commits, languages] = await Promise.all([getRecentCommits(), getLanguageShares()]);
 
   return (
@@ -37,12 +38,12 @@ export async function Dashboard() {
             <h3 className="dash-title"><MessageIcon />Let&apos;s Connect</h3>
             <p className="dash-text">Always open to new opportunities, interesting projects and conversations.</p>
             <div className="dash-actions">
-              <a href="mailto:oluwatimilehin.nathan@gmail.com" className="dash-button dash-button-filled">
+              <a href={`mailto:${site.email}`} className="dash-button dash-button-filled">
                 <MailIcon />
                 Email me
               </a>
               <a
-                href="https://www.linkedin.com/in/oluwatimilehin-ilesanmi/"
+                href={site.linkedin}
                 className="dash-button"
                 target="_blank"
                 rel="noopener noreferrer"

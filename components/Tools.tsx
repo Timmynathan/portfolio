@@ -1,7 +1,9 @@
-import { TOOL_GROUPS, CORE_TOOLS } from "@/data/tools";
+import type { ToolsContent } from "@/types";
 import { WrenchIcon } from "@/components/icons";
 
-export function Tools() {
+export function Tools({ tools }: { tools: ToolsContent }) {
+  const coreTools = new Set(tools.core);
+
   return (
     <section id="tools" className="tools">
       <div className="container">
@@ -12,12 +14,12 @@ export function Tools() {
           </div>
 
           <div className="tools-list">
-            {TOOL_GROUPS.map((group) => (
+            {tools.groups.map((group) => (
               <div key={group.title} className="tools-row">
                 <h3 className="tools-row-title">{group.title}</h3>
                 <ul className="tools-chips">
                   {group.tools.map((tool) => {
-                    const core = CORE_TOOLS.has(tool);
+                    const core = coreTools.has(tool);
                     return (
                       <li key={tool} className={core ? "tool-chip tool-chip-core" : "tool-chip"}>
                         {tool}
