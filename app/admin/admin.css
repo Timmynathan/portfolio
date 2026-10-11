@@ -1,0 +1,310 @@
+/* ==========================================================================
+   Admin console (/admin) — uses the site's own tokens from globals.css
+   ========================================================================== */
+
+.adm {
+    min-height: 100vh;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    font-size: 0.85rem;
+}
+
+.adm-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+.adm-heading { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+.adm-header-actions { display: flex; gap: 0.5rem; }
+
+.adm-main {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 6rem;
+}
+
+.adm-notice {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+    line-height: 1.6;
+}
+
+.adm-notice-error { border-color: var(--color-danger); }
+
+/* --- Buttons ----------------------------------------------------------- */
+.adm-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--color-text);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) ease,
+                background-color var(--duration-fast) ease,
+                border-color var(--duration-fast) ease;
+}
+
+.adm-button:hover:not(:disabled) { background: var(--color-text); color: var(--color-bg); }
+.adm-button:disabled { opacity: 0.4; cursor: not-allowed; }
+.adm-button:focus-visible,
+.adm-icon-button:focus-visible,
+.adm-tab:focus-visible,
+.adm-list-select:focus-visible { outline: 2px solid var(--color-text); outline-offset: 2px; }
+
+.adm-button-quiet { border-color: var(--color-border); color: var(--color-text-muted); }
+.adm-button-quiet:hover:not(:disabled) { background: transparent; border-color: var(--color-text); color: var(--color-text); }
+
+.adm-button-primary { background: var(--color-text); color: var(--color-bg); }
+.adm-button-primary:hover:not(:disabled) { background: transparent; color: var(--color-text); }
+
+.adm-icon-button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.adm-icon-button:hover:not(:disabled) { border-color: var(--color-text); color: var(--color-text); }
+.adm-icon-button:disabled { opacity: 0.3; cursor: not-allowed; }
+.adm-icon-button-danger:hover:not(:disabled) { border-color: var(--color-danger); color: var(--color-danger); }
+
+.adm-row-controls { display: inline-flex; flex-shrink: 0; gap: 0.2rem; }
+
+/* --- Tabs -------------------------------------------------------------- */
+.adm-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+.adm-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.adm-tab:hover { color: var(--color-text); border-color: var(--color-text); }
+.adm-tab[aria-selected="true"] { background: var(--color-text); border-color: var(--color-text); color: var(--color-bg); }
+
+/* Unsaved-changes marker */
+.adm-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-orange); }
+
+.adm-panel {
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+/* --- List + form layout ------------------------------------------------ */
+.adm-split {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 800px) {
+    .adm-split { grid-template-columns: 1fr; }
+    .adm-header { padding: 0.75rem 1rem; }
+    .adm-main { padding: 1rem 1rem 7rem; }
+}
+
+.adm-list { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.adm-list-heading {
+    margin: 0.75rem 0 0.3rem;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.adm-list > .adm-list-heading:first-child,
+.adm-list > div:first-child > .adm-list-heading { margin-top: 0; }
+
+.adm-list-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
+    padding: 0.3rem 0.35rem 0.3rem 0;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+.adm-list-row-active { border-color: var(--color-text); box-shadow: inset 3px 0 0 var(--color-text); }
+
+.adm-list-select {
+    flex: 1;
+    min-width: 0;
+    padding: 0.3rem 0.4rem 0.3rem 0.7rem;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.adm-list .adm-button { align-self: flex-start; margin-top: 0.4rem; }
+
+.adm-empty { font-size: 0.76rem; color: var(--color-text-muted); }
+
+/* --- Form fields ------------------------------------------------------- */
+.adm-form-fields { display: flex; flex-direction: column; gap: 0.9rem; }
+.adm-narrow { max-width: 680px; }
+
+.adm-field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.adm-label { font-size: 0.72rem; font-weight: 600; color: var(--color-text); }
+.adm-hint { font-size: 0.7rem; line-height: 1.5; color: var(--color-text-muted); }
+.adm-error { font-size: 0.74rem; color: var(--color-danger); }
+
+.adm-input {
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.adm-input:focus { outline: none; border-color: var(--color-text); }
+.adm-textarea { resize: vertical; min-height: 4rem; }
+
+.adm-subheading {
+    margin-top: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.adm-form-fields > .adm-subheading:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+.adm-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.9rem;
+    align-items: start;
+}
+
+/* A field (or group of fields) with its move/delete buttons on the right */
+.adm-repeat { display: flex; align-items: flex-start; gap: 0.6rem; }
+.adm-repeat > :first-child { flex: 1; min-width: 0; }
+.adm-repeat > .adm-row-controls { margin-top: 1.35rem; }
+
+.adm-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+}
+
+.adm-card .adm-button { align-self: flex-start; }
+.adm-form-fields > .adm-button { align-self: flex-start; }
+
+.adm-check { display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; }
+.adm-check input { width: 15px; height: 15px; accent-color: var(--color-text); }
+
+.adm-details { margin-top: 1.25rem; border-top: 1px solid var(--color-border); padding-top: 0.9rem; }
+.adm-details summary { font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+.adm-details[open] summary { margin-bottom: 0.9rem; }
+
+/* --- Tools ------------------------------------------------------------- */
+.adm-tool-rows { display: flex; flex-direction: column; gap: 0.4rem; }
+.adm-tool-row { display: flex; align-items: center; gap: 0.6rem; }
+.adm-tool-row .adm-input { flex: 1; min-width: 0; }
+
+/* --- Image upload ------------------------------------------------------ */
+.adm-image { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+
+.adm-image-preview {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+}
+
+.adm-image-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}
+
+.adm-image-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+/* --- Save bar ---------------------------------------------------------- */
+.adm-savebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+.adm-status { flex: 1; min-width: 200px; font-size: 0.76rem; color: var(--color-text-muted); }
+.adm-status-error { color: var(--color-danger); font-weight: 500; }
+
+/* --- Login ------------------------------------------------------------- */
+.adm-login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 360px;
+    margin: 3rem auto 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+.adm-login .adm-subheading { margin-top: 0; padding-top: 0; border-top: none; font-size: 1rem; }

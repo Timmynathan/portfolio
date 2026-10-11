@@ -1,24 +1,23 @@
 import Image from "next/image";
+import type { SiteSettings } from "@/types";
 import { DownloadFileIcon, GithubIcon, LinkedinIcon, MailIcon } from "./icons";
 
-export function Hero() {
+export function Hero({ site }: { site: SiteSettings }) {
   return (
     <section id="home" className="hero">
       <div className="container">
         <div className="hero-content fade-in">
           <div className="hero-text">
             <h1 className="hero-name">
-              Hey! I&apos;m <span className="hero-name-accent">Nathaniel Ilesanmi</span>
+              Hey! I&apos;m <span className="hero-name-accent">{site.name}</span>
             </h1>
-            <p className="hero-role">AI Engineer</p>
+            <p className="hero-role">{site.role}</p>
             <p className="hero-description">
-              <span className="hero-description-line">
-                I build software that solves people&apos;s pain points end-to-end.
-              </span>
+              <span className="hero-description-line">{site.taglineLine1}</span>
               <br />
-              Currently building AI agents that take over the repetitive work businesses run on.
+              {site.taglineLine2}
             </p>
-            <p className="hero-availability">Lagos, Nigeria (GMT+1) · Open to remote roles</p>
+            {site.availability && <p className="hero-availability">{site.availability}</p>}
             <div className="hero-actions">
               <a href="/resume.pdf" download className="hero-resume magnetic">
                 <span>Resume</span>
@@ -26,7 +25,7 @@ export function Hero() {
               </a>
               <div className="hero-socials">
                 <a
-                  href="https://www.linkedin.com/in/oluwatimilehin-ilesanmi/"
+                  href={site.linkedin}
                   className="hero-social"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -36,7 +35,7 @@ export function Hero() {
                   <LinkedinIcon />
                 </a>
                 <a
-                  href="https://github.com/Timmynathan"
+                  href={site.github}
                   className="hero-social"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -46,7 +45,7 @@ export function Hero() {
                   <GithubIcon />
                 </a>
                 <a
-                  href="mailto:oluwatimilehin.nathan@gmail.com"
+                  href={`mailto:${site.email}`}
                   className="hero-social"
                   aria-label="Send email"
                   title="Email"
@@ -62,7 +61,7 @@ export function Hero() {
           <div className="hero-photo">
             <Image
               src="/images/profile_photo.png"
-              alt="Nathaniel"
+              alt={site.name}
               fill
               sizes="180px"
               priority

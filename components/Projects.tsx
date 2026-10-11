@@ -1,30 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { FEATURED_PROJECT_ID, PROJECTS, PROJECT_CATEGORIES } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectDetailModal } from "@/components/ProjectDetailModal";
 import { StarIcon } from "@/components/icons";
-import type { Project } from "@/types";
-
-const PROJECTS_BY_ID = new Map(PROJECTS.map((p) => [p.id, p]));
-
-function getProject(id: string): Project {
-  const project = PROJECTS_BY_ID.get(id);
-  if (!project) throw new Error(`Unknown project id "${id}" in data/projects.ts`);
-  return project;
-}
+import type { Project, ProjectsContent } from "@/types";
 
 const ALL = "All";
-const TOTAL_COUNT = PROJECT_CATEGORIES.reduce((n, c) => n + c.projectIds.length, 0);
-const FILTERS = [
-  { label: ALL, count: TOTAL_COUNT },
-  ...PROJECT_CATEGORIES.map((c) => ({ label: c.title, count: c.projectIds.length })),
-];
 
-export function Projects() {
+export function Projects({ content }: { content: ProjectsContent }) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState(ALL);
+
+  // `featured` drives the wide card layout, so it's set here from featuredId rather than trusted from the data.
+  const byId = new Map<string, Project>(
+    content.items.map((p) => [p.id, { ...p, featured: p.id === content.featuredId }])
+  );
+  const featured = content.featuredId ? byId.get(content.featuredId) : undefined;
+  // An id with no matching project (e.g. deleted in the admin console) is skipped.
+  const categories = content.categories
+    .map((category) => ({
+      ...category,
+      projects: category.projectIds.map((id) => byId.get(id)).filter((p): p is Project => Boolean(p)),
+    }))
+    .filter((category) => category.projects.length > 0);
+
+  const filters = [
+    { label: ALL, count: categories.reduce((n, c) => n + c.projects.length, 0) },
+    ...categories.map((c) => ({ label: c.title, count: c.projects.length })),
+  ];
 
   return (
     <section id="projects" className="projects">
@@ -35,12 +39,12 @@ export function Projects() {
             <h2 className="section-title">Featured Projects</h2>
           </div>
 
-          <ProjectCard project={getProject(FEATURED_PROJECT_ID)} onOpenDetails={setSelectedProject} />
+          {featured && <ProjectCard project={featured} onOpenDetails={setSelectedProject} />}
 
           <div className="project-filters">
             <span className="project-filters-label" id="project-filters-label">Filter by category</span>
             <div className="project-filters-tabs" role="group" aria-labelledby="project-filters-label">
-              {FILTERS.map(({ label, count }) => (
+              {filters.map(({ label, count }) => (
                 <button
                   key={label}
                   type="button"
@@ -56,7 +60,7 @@ export function Projects() {
           </div>
         </div>
 
-        {PROJECT_CATEGORIES.map((category) => (
+        {categories.map((category) => (
           // Hidden rather than unmounted, so FadeInObserver (which only observes elements present
           // on first render) still reveals a category the first time it's shown.
           // Heading and grid share one fade-in wrapper so the heading never appears without its cards.
@@ -71,8 +75,8 @@ export function Projects() {
             </div>
 
             <div className="projects-grid">
-              {category.projectIds.map((id) => (
-                <ProjectCard key={id} project={getProject(id)} onOpenDetails={setSelectedProject} />
+              {category.projects.map((project) => (
+                <ProjectCard key={project.id} project={project} onOpenDetails={setSelectedProject} />
               ))}
             </div>
           </div>

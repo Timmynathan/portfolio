@@ -1299,6 +1299,83 @@ main section, section { padding: 6rem 0; }
 .contact-email a:hover { color: #ffffff; }
 
 /* --------------------------------------------------------------------------
+   Articles page  —  cards linking out to posts published elsewhere
+   -------------------------------------------------------------------------- */
+.articles-page {
+    padding-top: 5.5rem;
+    padding-bottom: 4rem;
+    min-height: 70vh;
+    background: var(--color-bg);
+}
+
+.articles-page .back-link { margin-bottom: 1.25rem; }
+.articles-page .section-heading { margin-bottom: 2rem; }
+.articles-page .section-title {
+    margin-bottom: 0;
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+    font-weight: 600;
+    text-align: left;
+}
+.articles-page .section-tag svg { width: 22px; height: 22px; }
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 700px) {
+    .article-list { grid-template-columns: 1fr; }
+}
+
+.article-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-card-bg);
+    text-decoration: none;
+    transition: box-shadow var(--duration-base) ease,
+                transform var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) ease;
+}
+
+.article-card:hover {
+    border-color: transparent;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+.article-meta { font-size: 0.7rem; font-weight: 500; color: var(--color-text-muted); }
+
+.article-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    color: var(--color-text);
+}
+
+.article-summary { font-size: 0.78rem; line-height: 1.55; color: var(--color-text-muted); }
+
+.article-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.article-read svg { width: 11px; height: 11px; }
+.article-card:hover .article-read { color: var(--color-accent); }
+
+.article-empty { font-size: 0.9rem; color: var(--color-text-muted); }
+
+/* --------------------------------------------------------------------------
    Dashboard  —  bento grid of small cards above the footer
    -------------------------------------------------------------------------- */
 main section.dashboard { background: var(--color-bg-alt); padding: 4rem 0; }

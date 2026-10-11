@@ -1,24 +1,10 @@
 // Like counts, stored in Supabase (schema: supabase/migrations/20261004000000_likes.sql).
 // Talks to Supabase's REST API directly, so no client library is needed.
-//
-// Requires two env vars (in .env.local and in the Vercel project):
-//   NEXT_PUBLIC_SUPABASE_URL       e.g. https://abcd1234.supabase.co
-//   NEXT_PUBLIC_SUPABASE_ANON_KEY  the project's anon / publishable key
-// Both are safe to expose: row level security limits the anon key to reading counts and calling toggle_like().
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+import { SUPABASE_URL, supabaseConfigured, supabaseHeaders as headers } from "@/lib/supabase";
 
 /** False when the env vars are missing — likes then stay on this device only and no counts are shown. */
-export const likesConfigured = Boolean(SUPABASE_URL && SUPABASE_KEY);
-
-function headers(): Record<string, string> {
-  return {
-    apikey: SUPABASE_KEY ?? "",
-    Authorization: `Bearer ${SUPABASE_KEY}`,
-    "Content-Type": "application/json",
-  };
-}
+export const likesConfigured = supabaseConfigured;
 
 /** All counts for the given ids in one request. Ids with no likes yet are simply absent. Throws on failure. */
 export async function fetchLikeCounts(ids: string[]): Promise<Record<string, number>> {

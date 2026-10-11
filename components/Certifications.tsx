@@ -1,8 +1,10 @@
-import { CERTIFICATIONS } from "@/data/certifications";
+import type { Certification } from "@/types";
 import { CertCard } from "@/components/CertCard";
 import { AwardIcon } from "@/components/icons";
 
-export function Certifications() {
+export function Certifications({ certifications }: { certifications: Certification[] }) {
+  if (certifications.length === 0) return null;
+
   return (
     <section id="certifications" className="certifications">
       <div className="container">
@@ -13,7 +15,7 @@ export function Certifications() {
           </div>
 
           <div className="cert-grid">
-            {CERTIFICATIONS.map((cert) => (
+            {certifications.map((cert) => (
               <CertCard key={cert.title} cert={cert} />
             ))}
           </div>

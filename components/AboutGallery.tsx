@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import type { AboutPhoto } from "@/data/about-photos";
+import type { AboutPhoto } from "@/types";
 import { fetchLikeCounts, likesConfigured, toggleLike } from "@/lib/likes";
 import { HeartIcon } from "@/components/icons";
 

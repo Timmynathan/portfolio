@@ -1,13 +1,4 @@
-export interface AboutPhoto {
-  /** Stable id for the photo's like count. Changing it starts that photo's count again from zero. */
-  id: string;
-  src: string;
-  alt: string;
-  /** CSS object-position, for when a center crop cuts off the subject. Default "center". */
-  position?: string;
-  /** CSS transform: scale() multiplier, to zoom in on the subject. Default 1. */
-  scale?: number;
-}
+import type { AboutPhoto } from "@/types";
 
 export const ABOUT_PHOTOS: AboutPhoto[] = [
   { id: "about-basketball", src: "/images/about/basketball.jpg", alt: "Playing pickup basketball outdoors", position: "center 30%" },

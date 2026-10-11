@@ -6,19 +6,22 @@ import { Certifications } from "@/components/Certifications";
 import { Dashboard } from "@/components/Dashboard";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
+import { getContent, visibleProjects } from "@/lib/content";
 
-export default function Portfolio() {
+export default async function Portfolio() {
+  const content = await getContent();
+
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
-        <Projects />
-        <Tools />
-        <Certifications />
-        <Dashboard />
+        <Hero site={content.site} />
+        <Projects content={visibleProjects(content.projects)} />
+        <Tools tools={content.tools} />
+        <Certifications certifications={content.certifications} />
+        <Dashboard site={content.site} />
       </main>
-      <Footer />
+      <Footer site={content.site} />
       <FadeInObserver />
     </>
   );

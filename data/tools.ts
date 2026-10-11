@@ -29,7 +29,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
 ];
 
 /** The everyday tools — rendered with stronger styling than the long tail. */
-export const CORE_TOOLS = new Set([
+export const CORE_TOOLS: string[] = [
   "TypeScript",
   "Python",
   "React",
@@ -42,4 +42,4 @@ export const CORE_TOOLS = new Set([
   "Supabase",
   "LangGraph",
   "Claude API",
-]);
+];
