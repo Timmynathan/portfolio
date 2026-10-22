@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { SiteSettings } from "@/types";
+import { RichText } from "./RichText";
 import { DownloadFileIcon, GithubIcon, LinkedinIcon, MailIcon } from "./icons";
 
 export function Hero({ site }: { site: SiteSettings }) {
@@ -13,9 +14,9 @@ export function Hero({ site }: { site: SiteSettings }) {
             </h1>
             <p className="hero-role">{site.role}</p>
             <p className="hero-description">
-              <span className="hero-description-line">{site.taglineLine1}</span>
+              <span className="hero-description-line"><RichText text={site.taglineLine1} /></span>
               <br />
-              {site.taglineLine2}
+              <RichText text={site.taglineLine2} />
             </p>
             {site.availability && <p className="hero-availability">{site.availability}</p>}
             <div className="hero-actions">

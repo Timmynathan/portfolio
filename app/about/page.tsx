@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
+import { RichText } from "@/components/RichText";
 import { AboutGallery } from "@/components/AboutGallery";
 import { getContent } from "@/lib/content";
 import { ArrowLeftIcon, CameraIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
@@ -48,7 +49,7 @@ export default async function AboutPage() {
 
                 {site.aboutBio.map((paragraph, i) => (
                   <p key={i} className="about-bio">
-                    {paragraph}
+                    <RichText text={paragraph} />
                   </p>
                 ))}
 

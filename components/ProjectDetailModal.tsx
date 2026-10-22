@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Project } from "@/types";
 import { TechTag } from "@/components/TechTag";
+import { RichText } from "@/components/RichText";
 import { CloseIcon, GithubIcon, GlobeIcon, PlayIcon } from "@/components/icons";
 
 export function ProjectDetailModal({
@@ -56,13 +57,13 @@ export function ProjectDetailModal({
             project.description.map((section) => (
               <div key={section.heading} className="project-detail-section">
                 <h4 className="project-detail-subheading">{section.heading}</h4>
-                <p className="project-detail-description">{section.body}</p>
+                <p className="project-detail-description"><RichText text={section.body} /></p>
               </div>
             ))
           ) : (
             project.description.split("\n\n").map((paragraph, i) => (
               <p key={i} className="project-detail-description">
-                {paragraph}
+                <RichText text={paragraph} />
               </p>
             ))
           )}

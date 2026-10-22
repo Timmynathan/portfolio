@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FadeInObserver } from "@/components/FadeInObserver";
+import { RichText } from "@/components/RichText";
 import { ArrowLeftIcon, ArrowUpRightIcon, ArticleIcon } from "@/components/icons";
 import { getContent } from "@/lib/content";
 
@@ -43,7 +44,7 @@ export default async function ArticlesPage() {
                       {[article.source, article.date].filter(Boolean).join(" · ")}
                     </div>
                     <h2 className="article-title">{article.title}</h2>
-                    {article.summary && <p className="article-summary">{article.summary}</p>}
+                    {article.summary && <p className="article-summary"><RichText text={article.summary} links={false} /></p>}
                     <span className="article-read">
                       Read{article.source ? ` on ${article.source}` : " article"} <ArrowUpRightIcon />
                     </span>
