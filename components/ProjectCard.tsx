@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Project } from "@/types";
 import { TechTag } from "@/components/TechTag";
+import { RichText } from "@/components/RichText";
 import { GithubIcon, GlobeIcon, PlayIcon } from "@/components/icons";
 
 export function ProjectCard({
@@ -47,7 +48,10 @@ export function ProjectCard({
         <h3 className="project-title">{project.title}</h3>
         {project.date && <p className="project-date">{project.date}</p>}
         <p className="project-description">
-          {project.shortDescription ?? (Array.isArray(project.description) ? project.description[0]?.body : project.description)}
+          <RichText
+            text={project.shortDescription ?? (Array.isArray(project.description) ? project.description[0]?.body ?? "" : project.description)}
+            links={false}
+          />
         </p>
         <div className="tech-stack">
           {project.techStack.map((t) => (

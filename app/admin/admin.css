@@ -308,3 +308,35 @@
 }
 
 .adm-login .adm-subheading { margin-top: 0; padding-top: 0; border-top: none; font-size: 1rem; }
+
+/* --- Formatting toolbar ------------------------------------------------ */
+.adm-format-bar { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+
+.adm-format-button {
+    min-width: 1.9rem;
+    height: 1.7rem;
+    padding: 0 0.45rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.adm-format-button:hover { border-color: var(--color-text); }
+.adm-format-button:focus-visible { outline: 2px solid var(--color-text); outline-offset: 2px; }
+.adm-format-bold { font-weight: 700; }
+.adm-format-italic { font-style: italic; }
+.adm-format-underline { text-decoration: underline; }
+.adm-format-strike { text-decoration: line-through; }
+
+.adm-format-preview {
+    padding: 0.5rem 0.65rem;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-text);
+}

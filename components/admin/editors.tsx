@@ -25,8 +25,8 @@ export function SiteEditor({ value, onChange }: { value: SiteSettings; onChange:
       <h3 className="adm-subheading">Home page</h3>
       <TextInput label="Name" value={value.name} onChange={(v) => set("name", v)} hint={`Shown as "Hey! I'm ${value.name || "…"}". The first word is also used in the browser tab title.`} />
       <TextInput label="Title" value={value.role} onChange={(v) => set("role", v)} hint="The big line under your name, e.g. AI Engineer." />
-      <TextInput label="Tagline — first line" value={value.taglineLine1} onChange={(v) => set("taglineLine1", v)} />
-      <TextInput label="Tagline — second line" value={value.taglineLine2} onChange={(v) => set("taglineLine2", v)} />
+      <TextArea label="Tagline — first line" rows={2} value={value.taglineLine1} onChange={(v) => set("taglineLine1", v)} hint="Press Enter for a new line. Select text and use the buttons to format it." />
+      <TextArea label="Tagline — second line" rows={2} value={value.taglineLine2} onChange={(v) => set("taglineLine2", v)} hint="Press Enter for a new line. Select text and use the buttons to format it." />
       <TextInput label="Location / availability line" value={value.availability} onChange={(v) => set("availability", v)} hint="Small line under the tagline. Leave empty to hide it." />
 
       <h3 className="adm-subheading">Contact links</h3>

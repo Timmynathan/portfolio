@@ -2,7 +2,8 @@
 
 // Small form building blocks shared by the admin editors.
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { RichText } from "@/components/RichText";
 
 export function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -42,6 +43,17 @@ export function TextInput({
   );
 }
 
+const FORMATS = [
+  { marker: "**", label: "B", title: "Bold (⌘B)", key: "b", className: "adm-format-bold" },
+  { marker: "*", label: "I", title: "Italic (⌘I)", key: "i", className: "adm-format-italic" },
+  { marker: "++", label: "U", title: "Underline (⌘U)", key: "u", className: "adm-format-underline" },
+  { marker: "~~", label: "S", title: "Strikethrough", key: "", className: "adm-format-strike" },
+] as const;
+
+/**
+ * A multi-line text box with a formatting toolbar. Formatting is stored as markers in the text
+ * (**bold**, *italic*, ++underline++, ~~strike~~, [label](url)) and rendered by <RichText>.
+ */
 export function TextArea({
   label,
   value,
@@ -55,10 +67,82 @@ export function TextArea({
   hint?: string;
   rows?: number;
 }) {
+  const id = useId();
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  // Replaces the selection with before + text + after, then reselects the text.
+  const insert = (before: string, after: string, fallback: string) => {
+    const el = ref.current;
+    if (!el) return;
+    const { selectionStart: start, selectionEnd: end } = el;
+    // Clicking again on already-formatted text removes the formatting.
+    if (value.slice(start - before.length, start) === before && value.slice(end, end + after.length) === after) {
+      onChange(value.slice(0, start - before.length) + value.slice(start, end) + value.slice(end + after.length));
+      requestAnimationFrame(() => {
+        el.focus();
+        el.setSelectionRange(start - before.length, end - before.length);
+      });
+      return;
+    }
+    const text = value.slice(start, end) || fallback;
+    onChange(value.slice(0, start) + before + text + after + value.slice(end));
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + before.length, start + before.length + text.length);
+    });
+  };
+
+  const addLink = () => {
+    const url = window.prompt("Link address (https://… or mailto:…)", "https://");
+    if (!url || !/^(https?:\/\/|mailto:)\S+$/i.test(url.trim())) return;
+    insert("[", `](${url.trim()})`, "link text");
+  };
+
   return (
-    <Field label={label} hint={hint}>
-      <textarea className="adm-input adm-textarea" rows={rows} value={value} onChange={(e) => onChange(e.target.value)} />
-    </Field>
+    <div className="adm-field">
+      <label htmlFor={id} className="adm-label">
+        {label}
+      </label>
+      <div className="adm-format-bar" role="toolbar" aria-label={`Formatting for ${label}`}>
+        {FORMATS.map((format) => (
+          <button
+            key={format.marker}
+            type="button"
+            className={`adm-format-button ${format.className}`}
+            title={format.title}
+            aria-label={format.title}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => insert(format.marker, format.marker, "text")}
+          >
+            {format.label}
+          </button>
+        ))}
+        <button type="button" className="adm-format-button" title="Link" aria-label="Link" onMouseDown={(e) => e.preventDefault()} onClick={addLink}>
+          Link
+        </button>
+      </div>
+      <textarea
+        id={id}
+        ref={ref}
+        className="adm-input adm-textarea"
+        rows={rows}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={(e) => {
+          if (!(e.metaKey || e.ctrlKey)) return;
+          const format = FORMATS.find((f) => f.key && f.key === e.key.toLowerCase());
+          if (!format) return;
+          e.preventDefault();
+          insert(format.marker, format.marker, "text");
+        }}
+      />
+      {/[*+~[]/.test(value) && (
+        <div className="adm-format-preview" aria-label="Preview">
+          <RichText text={value} links={false} />
+        </div>
+      )}
+      {hint && <span className="adm-hint">{hint}</span>}
+    </div>
   );
 }
 
